@@ -1,0 +1,40 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.adaptive-ml.com/v0.14/advanced/authentication
+docs: https://docs.adaptive-ml.com/v0.14/advanced/authentication
+summary:
+  types: [http]
+  http_scheme: bearer
+  api_key_in: [header]
+  oauth2_flows: []
+  note: >-
+    Adaptive Engine is self-hosted; each deployment issues personal and
+    service-account API keys. Requests authenticate with a Bearer API key
+    against the deployment base URL (ADAPTIVE_URL). SSO/OIDC is available for
+    human user login to the console (not for API request auth).
+schemes:
+- name: bearerApiKey
+  type: http
+  scheme: bearer
+  in: header
+  header: Authorization
+  format: 'Authorization: Bearer <ADAPTIVE_API_KEY>'
+  env:
+  - ADAPTIVE_URL
+  - ADAPTIVE_API_KEY
+  sources: [docs]
+  description: >-
+    Personal or service-account API key. Generate a personal key from the
+    project switcher (Generate new API key); create service accounts via
+    adaptive.users.create_service_account for CI/CD and automation. The key is
+    shown once at creation and cannot be retrieved later. Because the API is
+    OpenAI-compatible, the OpenAI client authenticates the same way
+    (api_key=ADAPTIVE_API_KEY, base_url=ADAPTIVE_URL/api/v1).
+sso:
+  protocol: oidc
+  scope: console-user-login-only
+  docs: https://docs.adaptive-ml.com/v0.14/advanced/sso
+  note: OIDC identity providers configure human login to the Adaptive console; not an API auth surface.
+note: >-
+  The published OpenAPI (concorde) declares no components.securitySchemes; this
+  profile is searched from the docs auth page rather than derived from the spec.
