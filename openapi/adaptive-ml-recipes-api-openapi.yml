@@ -1,0 +1,52 @@
+openapi: 3.1.0
+info:
+  title: concorde artifacts::rest Recipes API
+  description: Recipe operations
+  license:
+    name: UNLICENSED
+    identifier: UNLICENSED
+  version: 0.1.0
+tags:
+- name: Recipes
+  description: Recipe operations
+paths:
+  /api/v1/projects/{project}/recipes/{recipe}/download:
+    get:
+      tags:
+      - Recipes
+      summary: Download a recipe zip file from storage
+      description: 'Returns the recipe zip file as an attachment.
+
+        Supports both project-specific recipes and global recipes (available in all projects).'
+      operationId: Download recipe
+      parameters:
+      - name: project
+        in: path
+        description: Project ID or key
+        required: true
+        schema:
+          $ref: '#/components/schemas/IdOrKey'
+      - name: recipe
+        in: path
+        description: Recipe ID or key
+        required: true
+        schema:
+          $ref: '#/components/schemas/IdOrKey'
+      responses:
+        '200':
+          description: Recipe zip file
+          content:
+            application/zip: {}
+        '403':
+          description: Missing permission
+        '404':
+          description: Recipe not found
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    IdOrKey:
+      type: string
+      description: id or key of the entity
+      examples:
+      - 76d1fab3-214c-47ef-bb04-16270639bf89

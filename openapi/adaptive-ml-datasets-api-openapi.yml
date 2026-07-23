@@ -1,0 +1,60 @@
+openapi: 3.1.0
+info:
+  title: concorde artifacts::rest Datasets API
+  description: ''
+  license:
+    name: UNLICENSED
+    identifier: UNLICENSED
+  version: 0.1.0
+tags:
+- name: Datasets
+paths:
+  /api/v1/projects/{project}/datasets/{dataset_id}/download:
+    get:
+      tags:
+      - Datasets
+      summary: Download a dataset file from storage
+      description: Returns the dataset JSONL file as an attachment
+      operationId: Download dataset
+      parameters:
+      - name: project
+        in: path
+        description: Project ID or key
+        required: true
+        schema:
+          $ref: '#/components/schemas/IdOrKey'
+      - name: dataset
+        in: path
+        description: Dataset ID or key
+        required: true
+        schema:
+          $ref: '#/components/schemas/IdOrKey'
+      - name: format
+        in: query
+        description: 'File format: ''recipe'' (converted format) or ''original'' (as uploaded). Defaults to ''original''. If original file is not available, falls back to recipe format.'
+        required: false
+        schema:
+          type: string
+      - name: dataset_id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IdOrKey'
+      responses:
+        '200':
+          description: Dataset file
+          content:
+            application/x-ndjson: {}
+        '403':
+          description: Missing permission
+        '404':
+          description: Dataset not found
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    IdOrKey:
+      type: string
+      description: id or key of the entity
+      examples:
+      - 76d1fab3-214c-47ef-bb04-16270639bf89

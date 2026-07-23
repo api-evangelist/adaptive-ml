@@ -1,0 +1,37 @@
+openapi: 3.1.0
+info:
+  title: concorde artifacts::rest API
+  description: ''
+  license:
+    name: UNLICENSED
+    identifier: UNLICENSED
+  version: 0.1.0
+tags:
+- name: artifacts::rest
+paths:
+  /artifacts/{artifact_id}/download:
+    get:
+      tags:
+      - artifacts::rest
+      operationId: download_artifact
+      parameters:
+      - name: artifact_id
+        in: path
+        description: Unique identifier for the artifact
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: File download successful
+          content:
+            application/octet-stream: {}
+        '403':
+          description: Access denied
+        '404':
+          description: Artifact not found
+        '500':
+          description: Internal server error
+      security:
+      - bearer_auth: []

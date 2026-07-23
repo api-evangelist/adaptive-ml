@@ -1,0 +1,119 @@
+openapi: 3.1.0
+info:
+  title: concorde artifacts::rest Embeddings API
+  description: ''
+  license:
+    name: UNLICENSED
+    identifier: UNLICENSED
+  version: 0.1.0
+tags:
+- name: Embeddings
+paths:
+  /api/v1/embeddings:
+    post:
+      tags:
+      - Embeddings
+      operationId: Embeddings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateEmbeddingsInput'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbeddingsResponseList'
+components:
+  schemas:
+    EmbeddingsEncodingFormat:
+      type: string
+      enum:
+      - Float
+      - Base64
+    Usage:
+      type: object
+      required:
+      - completion_tokens
+      - prompt_tokens
+      - total_tokens
+      properties:
+        completion_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        prompt_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        total_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+    GenerateEmbeddingsInput:
+      type: object
+      required:
+      - input
+      - model
+      properties:
+        input:
+          type: string
+        model:
+          type: string
+          description: can be of the form '{project}/{model}' or '{project}'. In the latter it will use the default model
+        encoding_format:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/EmbeddingsEncodingFormat'
+            description: default to float
+        dimensions:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+        user:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        session_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+    EmbeddingResponse:
+      type: object
+      required:
+      - index
+      - embedding
+      properties:
+        index:
+          type: integer
+          format: int32
+          minimum: 0
+        embedding:
+          $ref: '#/components/schemas/EmbeddingsData'
+    EmbeddingsData:
+      oneOf:
+      - type: array
+        items:
+          type: number
+          format: float
+      - type: string
+    EmbeddingsResponseList:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmbeddingResponse'
+        usage:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Usage'

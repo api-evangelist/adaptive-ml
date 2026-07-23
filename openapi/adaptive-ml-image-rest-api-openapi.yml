@@ -1,0 +1,41 @@
+openapi: 3.1.0
+info:
+  title: concorde artifacts::rest image::rest API
+  description: ''
+  license:
+    name: UNLICENSED
+    identifier: UNLICENSED
+  version: 0.1.0
+tags:
+- name: image::rest
+paths:
+  /images/{project_id}/{filename}:
+    get:
+      tags:
+      - image::rest
+      operationId: download_image
+      parameters:
+      - name: project_id
+        in: path
+        description: Project ID the image belongs to
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: filename
+        in: path
+        description: Image filename (hash.ext)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Image file
+          content:
+            image/*: {}
+        '403':
+          description: Access denied
+        '404':
+          description: Image not found
+      security:
+      - bearer_auth: []

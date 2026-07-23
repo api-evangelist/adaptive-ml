@@ -1,0 +1,200 @@
+openapi: 3.1.0
+info:
+  title: concorde artifacts::rest Feedback API
+  description: ''
+  license:
+    name: UNLICENSED
+    identifier: UNLICENSED
+  version: 0.1.0
+tags:
+- name: Feedback
+paths:
+  /api/v1/comparison:
+    post:
+      tags:
+      - Feedback
+      summary: Add comparison
+      description: 'Register a comparison between two interactions to indicate a preference according to a criteria.
+
+        Both interactions should share the same prompt.'
+      operationId: Add comparison
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddComparisonRequest'
+        required: true
+      responses:
+        '201':
+          description: Comparison recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComparisonOutput'
+  /api/v1/outcome:
+    post:
+      tags:
+      - Feedback
+      summary: Add outcome
+      description: Register an outcome about a previous user session
+      operationId: Add outcome
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddOutcomeRequest'
+        required: true
+      responses:
+        '201':
+          description: outcome recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutcomeOutput'
+components:
+  schemas:
+    IdOrKey:
+      type: string
+      description: id or key of the entity
+      examples:
+      - 76d1fab3-214c-47ef-bb04-16270639bf89
+    MessageContentPart:
+      oneOf:
+      - type: object
+        required:
+        - text
+        - type
+        properties:
+          text:
+            type: string
+          type:
+            type: string
+            enum:
+            - text
+      - type: object
+        required:
+        - image_url
+        - type
+        properties:
+          image_url:
+            type: string
+          type:
+            type: string
+            enum:
+            - image_url
+    ComparisonTie:
+      type: string
+      enum:
+      - good
+      - bad
+    AddOutcomeRequest:
+      type: object
+      required:
+      - value
+      - project_id
+      - metric
+      - session_id
+      properties:
+        value:
+          description: 'If the metric is Bool, accepts `0`, `1`, `true` or `false`
+
+            If the metric is Scalar, accepts number'
+        project_id:
+          $ref: '#/components/schemas/IdOrKey'
+        metric:
+          $ref: '#/components/schemas/IdOrKey'
+        session_id:
+          type: string
+          format: uuid
+        user_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+    ComparisonOutput:
+      type: object
+      required:
+      - comparison_id
+      properties:
+        comparison_id:
+          type: string
+          format: uuid
+    CompletionIdOrText:
+      oneOf:
+      - type: string
+        format: uuid
+      - type: object
+        required:
+        - text
+        - model
+        properties:
+          text:
+            type: string
+          model:
+            $ref: '#/components/schemas/IdOrKey'
+    ChatMessageInput:
+      type: object
+      required:
+      - content
+      - role
+      properties:
+        content:
+          $ref: '#/components/schemas/MessagePackage'
+        role:
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        completion_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        metadata: {}
+    OutcomeOutput:
+      type: object
+      required:
+      - outcome_id
+      properties:
+        outcome_id:
+          type: string
+          format: uuid
+    AddComparisonRequest:
+      type: object
+      required:
+      - metric
+      - preferred_completion
+      - other_completion
+      - project
+      properties:
+        metric:
+          $ref: '#/components/schemas/IdOrKey'
+        messages:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessageInput'
+          description: Required when using raw text for completion, ignored if using ids
+        preferred_completion:
+          $ref: '#/components/schemas/CompletionIdOrText'
+        other_completion:
+          $ref: '#/components/schemas/CompletionIdOrText'
+        tied:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ComparisonTie'
+        project:
+          $ref: '#/components/schemas/IdOrKey'
+        user_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+    MessagePackage:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/MessageContentPart'

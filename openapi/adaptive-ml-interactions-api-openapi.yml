@@ -1,0 +1,188 @@
+openapi: 3.1.0
+info:
+  title: concorde artifacts::rest Interactions API
+  description: Load interactions in the db
+  license:
+    name: UNLICENSED
+    identifier: UNLICENSED
+  version: 0.1.0
+tags:
+- name: Interactions
+  description: Load interactions in the db
+paths:
+  /api/v1/interactions:
+    post:
+      tags:
+      - Interactions
+      summary: Add interaction
+      description: Import an interaction in your project. You can also include feedback about the interaction
+      operationId: Add interaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddInteractionsRequest'
+        required: true
+      responses:
+        '201':
+          description: Interaction recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddInteractionsResponse'
+components:
+  schemas:
+    IdOrKey:
+      type: string
+      description: id or key of the entity
+      examples:
+      - 76d1fab3-214c-47ef-bb04-16270639bf89
+    MessageContentPart:
+      oneOf:
+      - type: object
+        required:
+        - text
+        - type
+        properties:
+          text:
+            type: string
+          type:
+            type: string
+            enum:
+            - text
+      - type: object
+        required:
+        - image_url
+        - type
+        properties:
+          image_url:
+            type: string
+          type:
+            type: string
+            enum:
+            - image_url
+    AddInteractionsResponse:
+      type: object
+      required:
+      - completion_id
+      - session_id
+      - feedback_ids
+      properties:
+        completion_id:
+          type: string
+          format: uuid
+        session_id:
+          type: string
+          format: uuid
+        feedback_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+    InteractionFeedback:
+      type: object
+      required:
+      - metric
+      - value
+      properties:
+        metric:
+          $ref: '#/components/schemas/IdOrKey'
+        value:
+          description: 'If the metric is Bool, accepts `0`, `1`, `true` or `false`
+
+            If the metric is Scalar, accepts number'
+        reason:
+          type:
+          - string
+          - 'null'
+        details:
+          type:
+          - string
+          - 'null'
+        created_at:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/InputDateTime'
+    InputDateTime:
+      type: string
+      description: Input date field
+      examples:
+      - '2024-02-21T09:51:03Z'
+    ChatMessageInput:
+      type: object
+      required:
+      - content
+      - role
+      properties:
+        content:
+          $ref: '#/components/schemas/MessagePackage'
+        role:
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        completion_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        metadata: {}
+    AddInteractionsRequest:
+      type: object
+      required:
+      - project
+      - messages
+      - completion
+      properties:
+        model_service:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/IdOrKey'
+        project:
+          $ref: '#/components/schemas/IdOrKey'
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessageInput'
+        completion:
+          type: string
+        feedbacks:
+          type: array
+          items:
+            $ref: '#/components/schemas/InteractionFeedback'
+        user:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        session_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        created_at:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/InputDateTime'
+        ab_campaign:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/IdOrKey'
+        labels:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/DictString'
+    DictString:
+      type: object
+      description: dictionnary with key and values as string
+      additionalProperties:
+        type: string
+      examples:
+      - key: value
+    MessagePackage:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/MessageContentPart'
