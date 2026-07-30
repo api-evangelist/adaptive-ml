@@ -1,20 +1,174 @@
 aid: adaptive-ml
 name: Adaptive ML
-description: 'Adaptive ML is a company surfaced as a portfolio company of index-ventures and added to
-  the API Evangelist network as a stub for enrichment. Sector: ai-ml. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: >-
+  Adaptive ML builds Adaptive Engine, an enterprise platform for developing,
+  evaluating, and serving specialized open-source large language models via
+  reinforcement-learning post-training. The three-phase workflow (Adapt,
+  Evaluate, Serve) lets teams fine-tune smaller models to outperform commercial
+  APIs, measure them with custom AI judges and graders, and feed production
+  signals back into training. Adaptive Engine is self-hosted (Kubernetes/Helm)
+  and exposes an OpenAI-compatible REST API for chat completions and embeddings,
+  plus interactions, comparisons, outcomes, dataset/recipe management, and
+  chunked uploads. Tooling includes the Python adaptive-sdk and adaptive-harmony
+  libraries and the adpt CLI. Adaptive ML was acquired by Datadog.
 url: https://raw.githubusercontent.com/api-evangelist/adaptive-ml/refs/heads/main/apis.yml
 x-type: company
 x-source: index-ventures-portfolio
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profile
+x-tier-reason: enriched-from-public-developer-surface
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
 modified: '2026-07-17'
+image: https://www.adaptive-ml.com/favicon.ico
 tags:
 - Company
 - Ai Ml
-apis: []
+- LLM
+- Fine-Tuning
+- Reinforcement Learning
+- Model Evaluation
+- Inference
+- OpenAI-Compatible
+- MLOps
+apis:
+- aid: adaptive-ml:adaptive-ml-artifacts-rest-api
+  name: Adaptive ML artifacts::rest API
+  description: The artifacts::rest API from Adaptive ML — 1 operation(s) for artifacts::rest.
+  humanURL: https://docs.adaptive-ml.com/v0.14/reference/api
+  baseURL: https://your-adaptive-deployment/api/v1
+  tags:
+  - artifacts::rest
+  properties:
+  - type: OpenAPI
+    url: openapi/adaptive-ml-artifacts-rest-api-openapi.yml
+  - type: Documentation
+    url: https://docs.adaptive-ml.com/v0.14/reference/api
+  - type: Authentication
+    url: authentication/adaptive-ml-authentication.yml
+- aid: adaptive-ml:adaptive-ml-chunked-upload-api
+  name: Adaptive ML Chunked Upload API
+  description: Upload large files in chunks
+  humanURL: https://docs.adaptive-ml.com/v0.14/reference/api
+  baseURL: https://your-adaptive-deployment/api/v1
+  tags:
+  - Chunked Upload
+  properties:
+  - type: OpenAPI
+    url: openapi/adaptive-ml-chunked-upload-api-openapi.yml
+  - type: Documentation
+    url: https://docs.adaptive-ml.com/v0.14/reference/api
+  - type: Authentication
+    url: authentication/adaptive-ml-authentication.yml
+- aid: adaptive-ml:adaptive-ml-completions-api
+  name: Adaptive ML Completions API
+  description: The Completions API from Adaptive ML — 1 operation(s) for completions.
+  humanURL: https://docs.adaptive-ml.com/v0.14/reference/api
+  baseURL: https://your-adaptive-deployment/api/v1
+  tags:
+  - Completions
+  properties:
+  - type: OpenAPI
+    url: openapi/adaptive-ml-completions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.adaptive-ml.com/v0.14/reference/api
+  - type: Authentication
+    url: authentication/adaptive-ml-authentication.yml
+- aid: adaptive-ml:adaptive-ml-datasets-api
+  name: Adaptive ML Datasets API
+  description: The Datasets API from Adaptive ML — 1 operation(s) for datasets.
+  humanURL: https://docs.adaptive-ml.com/v0.14/reference/api
+  baseURL: https://your-adaptive-deployment/api/v1
+  tags:
+  - Datasets
+  properties:
+  - type: OpenAPI
+    url: openapi/adaptive-ml-datasets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.adaptive-ml.com/v0.14/reference/api
+  - type: Authentication
+    url: authentication/adaptive-ml-authentication.yml
+- aid: adaptive-ml:adaptive-ml-embeddings-api
+  name: Adaptive ML Embeddings API
+  description: The Embeddings API from Adaptive ML — 1 operation(s) for embeddings.
+  humanURL: https://docs.adaptive-ml.com/v0.14/reference/api
+  baseURL: https://your-adaptive-deployment/api/v1
+  tags:
+  - Embeddings
+  properties:
+  - type: OpenAPI
+    url: openapi/adaptive-ml-embeddings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.adaptive-ml.com/v0.14/reference/api
+  - type: Authentication
+    url: authentication/adaptive-ml-authentication.yml
+- aid: adaptive-ml:adaptive-ml-feedback-api
+  name: Adaptive ML Feedback API
+  description: The Feedback API from Adaptive ML — 2 operation(s) for feedback.
+  humanURL: https://docs.adaptive-ml.com/v0.14/reference/api
+  baseURL: https://your-adaptive-deployment/api/v1
+  tags:
+  - Feedback
+  properties:
+  - type: OpenAPI
+    url: openapi/adaptive-ml-feedback-api-openapi.yml
+  - type: Documentation
+    url: https://docs.adaptive-ml.com/v0.14/reference/api
+  - type: Authentication
+    url: authentication/adaptive-ml-authentication.yml
+- aid: adaptive-ml:adaptive-ml-image-rest-api
+  name: Adaptive ML image::rest API
+  description: The image::rest API from Adaptive ML — 1 operation(s) for image::rest.
+  humanURL: https://docs.adaptive-ml.com/v0.14/reference/api
+  baseURL: https://your-adaptive-deployment/api/v1
+  tags:
+  - image::rest
+  properties:
+  - type: OpenAPI
+    url: openapi/adaptive-ml-image-rest-api-openapi.yml
+  - type: Documentation
+    url: https://docs.adaptive-ml.com/v0.14/reference/api
+  - type: Authentication
+    url: authentication/adaptive-ml-authentication.yml
+- aid: adaptive-ml:adaptive-ml-interactions-api
+  name: Adaptive ML Interactions API
+  description: Load interactions in the db
+  humanURL: https://docs.adaptive-ml.com/v0.14/reference/api
+  baseURL: https://your-adaptive-deployment/api/v1
+  tags:
+  - Interactions
+  properties:
+  - type: OpenAPI
+    url: openapi/adaptive-ml-interactions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.adaptive-ml.com/v0.14/reference/api
+  - type: Authentication
+    url: authentication/adaptive-ml-authentication.yml
+- aid: adaptive-ml:adaptive-ml-recipes-api
+  name: Adaptive ML Recipes API
+  description: Recipe operations
+  humanURL: https://docs.adaptive-ml.com/v0.14/reference/api
+  baseURL: https://your-adaptive-deployment/api/v1
+  tags:
+  - Recipes
+  properties:
+  - type: OpenAPI
+    url: openapi/adaptive-ml-recipes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.adaptive-ml.com/v0.14/reference/api
+  - type: Authentication
+    url: authentication/adaptive-ml-authentication.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -22,4 +176,58 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: http://adaptive-ml.com
+  url: https://www.adaptive-ml.com
+- type: DeveloperPortal
+  url: https://docs.adaptive-ml.com
+- type: Documentation
+  url: https://docs.adaptive-ml.com/v0.14/introduction
+- type: APIReference
+  url: https://docs.adaptive-ml.com/v0.14/reference/api
+- type: GettingStarted
+  url: https://docs.adaptive-ml.com/quickstart
+- type: Blog
+  url: https://www.adaptive-ml.com/blog
+- type: SignUp
+  url: https://www.adaptive-ml.com/book-a-demo
+- type: Support
+  url: https://www.adaptive-ml.com/contact-us
+- type: PrivacyPolicy
+  url: https://www.adaptive-ml.com/privacy
+- type: GitHubOrganization
+  url: https://github.com/adaptive-ml
+- type: Authentication
+  url: authentication/adaptive-ml-authentication.yml
+- type: Packages
+  url: packages/adaptive-ml-packages.yml
+- type: SDKs
+  url: packages/adaptive-ml-packages.yml
+- type: CLI
+  url: cli/adaptive-ml-cli.yml
+- type: ChangeLog
+  url: changelog/adaptive-ml-changelog.yml
+- type: Lifecycle
+  url: lifecycle/adaptive-ml-lifecycle.yml
+- type: Conventions
+  url: conventions/adaptive-ml-conventions.yml
+- type: ErrorCatalog
+  url: errors/adaptive-ml-problem-types.yml
+- type: Conformance
+  url: conformance/adaptive-ml-conformance.yml
+- type: DataModel
+  url: data-model/adaptive-ml-data-model.yml
+- type: MCPServer
+  url: mcp/adaptive-ml-mcp.yml
+- type: WellKnown
+  url: well-known/adaptive-ml-well-known.yml
+- type: LLMsTxt
+  url: llms/adaptive-ml-llms.txt
+- type: Overlay
+  url: overlays/adaptive-ml-openapi-overlay.yaml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/adaptive-ml-agentic-access.yml
+- type: Webhooks
+  url: asyncapi/adaptive-ml-webhooks.yml
+- type: DomainSecurity
+  url: security/adaptive-ml-domain-security.yml
