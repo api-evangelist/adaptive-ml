@@ -1,0 +1,22 @@
+generated: '2026-07-17'
+method: searched
+source: https://github.com/adaptive-ml/adpt , https://github.com/adaptive-ml/homebrew-tap
+name: adpt
+language: rust
+description: Command line tool for interacting with the Adaptive Platform (Adaptive Engine).
+repository: https://github.com/adaptive-ml/adpt
+install:
+- method: homebrew
+  command: brew install adaptive-ml/tap/adpt
+- method: winget
+  command: winget install adaptive-ml.adpt
+authentication:
+  env:
+  - ADAPTIVE_URL
+  - ADAPTIVE_API_KEY
+  note: >-
+    The CLI reads the deployment URL and personal/service-account API key from
+    environment variables, the same credentials used by the SDK and REST API.
+notes: >-
+  Command/resource surface is not published in the public docs index; captured
+  as a first-party CLI binary. The binary is also catalogued in packages/.

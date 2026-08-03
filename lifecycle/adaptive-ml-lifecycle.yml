@@ -1,0 +1,29 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.adaptive-ml.com/release-notes , https://docs.adaptive-ml.com/v0.14/reference/api
+versioning:
+  scheme: doc-versioned-plus-uri-path
+  platform_current: v0.14
+  api_path_version: v1
+  docs: https://docs.adaptive-ml.com/v0.14/introduction
+deprecation:
+  policy_url: https://docs.adaptive-ml.com/release-notes
+  formal_policy: false
+  note: >-
+    No standalone deprecation policy page. Breaking changes and removals are
+    announced per release in the release notes (e.g. v0.14.0 renamed Feedback ->
+    Score, removed the legacy judge entity and feedback.* API). No RFC 8594
+    Sunset/Deprecation HTTP header contract is documented.
+sla:
+  url: null
+  note: Self-hosted; availability is a function of the customer's own deployment, no public SLA.
+status_page: null
+status_page_note: >-
+  No public status page — Adaptive Engine runs inside the customer's own
+  Kubernetes environment, so there is no shared hosted status surface.
+release_notes:
+- product: Adaptive Engine
+  url: https://docs.adaptive-ml.com/release-notes
+- product: adaptive-harmony
+  url: https://docs.adaptive-ml.com/v0.14/harmony/release-notes
+deprecated_operations: []

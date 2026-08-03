@@ -1,0 +1,25 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/adaptive-ml-openapi-original.json , https://docs.adaptive-ml.com/v0.14/advanced/authentication
+standards:
+- id: openai-chat-completions
+  conforms: true
+  evidence: POST /api/v1/chat/completions follows the OpenAI chat-completions request/response shape; OpenAI clients interoperate.
+- id: openai-embeddings
+  conforms: true
+  evidence: POST /api/v1/embeddings follows the OpenAI embeddings shape (EmbeddingsResponseList / EmbeddingsData).
+- id: oidc
+  conforms: true
+  evidence: SSO supports OIDC identity providers for console user login (docs/advanced/sso).
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme in the REST OpenAPI; API auth is Bearer API key.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: REST responses use plain HTTP status codes, not application/problem+json.
+- id: json-schema-structured-output
+  conforms: true
+  evidence: response_format accepts a JSON Schema (or Pydantic model) to constrain model output.
+- id: sse-streaming
+  conforms: true
+  evidence: Chat completions stream deltas via server-sent events (ChatResponseChunk / StreamOptions).

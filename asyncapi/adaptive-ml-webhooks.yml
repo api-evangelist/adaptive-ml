@@ -1,0 +1,32 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.adaptive-ml.com/v0.14/advanced/integrations
+type: Webhooks
+summary: >-
+  Adaptive Engine emits platform notifications for job/model events via webhook,
+  Slack, and email, using a topic-based subscription system with wildcard
+  pattern matching. Configured in Settings -> Integrations. No AsyncAPI document
+  is published; this captures the documented webhook/notification surface.
+delivery_methods:
+- method: webhook
+  config: HTTP endpoint URL, custom headers
+  behavior: POST request with event payload
+- method: slack
+  config: Webhook URL, optional bot token
+  behavior: Posts to a channel via incoming webhook
+- method: email
+  config: SMTP server configuration
+  behavior: Sends to specified recipients
+events:
+- job completion
+- job failures
+- model status changes
+subscription:
+  style: topic-based pattern matching (supports wildcards)
+  topic_prefix: 'project:'
+  legacy_prefix: 'use_case: (backward-compat shim; migrate to project:)'
+configuration: Settings -> Integrations (multiple integrations per type supported)
+programmatic:
+  rest_sdk: none
+  note: No SDK resource for notifications yet; configure via the GraphQL API directly.
+docs: https://docs.adaptive-ml.com/v0.14/advanced/integrations

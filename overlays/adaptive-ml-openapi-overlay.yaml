@@ -1,0 +1,28 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Adaptive ML (Adaptive Engine)
+  version: 1.0.0
+extends: openapi/adaptive-ml-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: adaptive-ml
+    x-apievangelist-notes: >-
+      Adaptive Engine REST API (concorde). Self-hosted; base URL is the customer
+      deployment (ADAPTIVE_URL/api/v1). OpenAI-compatible chat/embeddings.
+    x-authentication: authentication/adaptive-ml-authentication.yml
+    x-conventions: conventions/adaptive-ml-conventions.yml
+    x-error-catalog: errors/adaptive-ml-problem-types.yml
+- target: $.components.securitySchemes
+  update:
+    bearerApiKey:
+      type: http
+      scheme: bearer
+      description: >-
+        Adaptive deployment API key (personal or service account) sent as
+        Authorization: Bearer <ADAPTIVE_API_KEY>. Added by API Evangelist —
+        the published spec declares no securitySchemes.
+- target: $.servers
+  update:
+  - url: https://your-adaptive-deployment/api/v1
+    description: Self-hosted Adaptive Engine deployment (ADAPTIVE_URL), added by API Evangelist.

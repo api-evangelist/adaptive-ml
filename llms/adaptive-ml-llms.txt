@@ -1,0 +1,56 @@
+# Adaptive ML Documentation
+
+## Docs
+
+- [Release notes](https://docs.adaptive-ml.com/release-notes.md): Release notes for Adaptive Engine
+- [Authentication](https://docs.adaptive-ml.com/v0.14/advanced/authentication.md): Configure API access, service accounts, and HTTP requests
+- [Integrations](https://docs.adaptive-ml.com/v0.14/advanced/integrations.md): External models, LangChain, and notifications
+- [GPU management](https://docs.adaptive-ml.com/v0.14/advanced/optimization.md): Compute pools, inference tuning, and GPU utilization
+- [Permissions](https://docs.adaptive-ml.com/v0.14/advanced/permissions.md): Manage permissions, roles and teams
+- [Reward servers](https://docs.adaptive-ml.com/v0.14/advanced/reward-servers.md): Deploy custom grading functions as external servers
+- [Single Sign-On (SSO)](https://docs.adaptive-ml.com/v0.14/advanced/sso.md): Configure OIDC identity providers for user login
+- [Datasets](https://docs.adaptive-ml.com/v0.14/core/datasets.md): Upload datasets for training and evaluation
+- [Graders](https://docs.adaptive-ml.com/v0.14/core/graders.md): Score completions for training and evaluation
+- [Inference](https://docs.adaptive-ml.com/v0.14/core/inference.md): Make requests to models deployed on Adaptive Engine
+- [Interactions](https://docs.adaptive-ml.com/v0.14/core/interactions.md): Track prompts, completions, and metrics
+- [Metrics](https://docs.adaptive-ml.com/v0.14/core/metrics.md): Track system, grader, and user metrics across completions
+- [Models](https://docs.adaptive-ml.com/v0.14/core/models.md): Deploy models on Adaptive Engine
+- [Monitoring](https://docs.adaptive-ml.com/v0.14/core/monitoring.md): Watch training telemetry across runs in real time
+- [Projects](https://docs.adaptive-ml.com/v0.14/core/projects.md): Organize your models, metrics, and datasets around specific tasks
+- [Recipes](https://docs.adaptive-ml.com/v0.14/core/recipes.md): Run training and evaluation workflows
+- [Architecture](https://docs.adaptive-ml.com/v0.14/deploy/architecture.md): Adaptive Engine system architecture
+- [Self-hosting](https://docs.adaptive-ml.com/v0.14/deploy/self-hosting.md): Deploy Adaptive Engine with Kubernetes and Helm
+- [Create a training algorithm](https://docs.adaptive-ml.com/v0.14/harmony/algorithms.md): How to write your own RL algorithm for custom training
+- [Output artifacts](https://docs.adaptive-ml.com/v0.14/harmony/artifacts.md): Save new datasets and evaluation results from runs
+- [Asynchronous utilities](https://docs.adaptive-ml.com/v0.14/harmony/async-utils.md): Helper functions for concurrent processing in recipes
+- [Training callbacks](https://docs.adaptive-ml.com/v0.14/harmony/callbacks.md): Monitor and evaluate your models during training with callbacks
+- [Input configuration](https://docs.adaptive-ml.com/v0.14/harmony/config.md): Create a self-documented recipe config to parametrize your recipe's inputs
+- [Multi-turn training with environments](https://docs.adaptive-ml.com/v0.14/harmony/cookbook/agentic/multi-turn.md): Train agents through multi-turn conversations using environments and tool use.
+- [Binary LLM judge grader](https://docs.adaptive-ml.com/v0.14/harmony/cookbook/custom-graders/binary-judge.md): Use BinaryJudgeGrader to have an LLM evaluate completions as PASS or FAIL against custom criteria.
+- [Label classification accuracy](https://docs.adaptive-ml.com/v0.14/harmony/cookbook/custom-graders/classification.md): Build a custom grader for label classification accuracy vs. a groundtruth
+- [Ranged scoring with LLM judges](https://docs.adaptive-ml.com/v0.14/harmony/cookbook/custom-graders/range-judge.md): Build a custom grader for nuanced numeric scoring (e.g., 1-5 scale) using LLM judges instead of binary PASS/FAIL
+- [Grading structured JSON with template injection](https://docs.adaptive-ml.com/v0.14/harmony/cookbook/custom-graders/structured-output.md): Use TemplatedPromptJudgeGrader to evaluate structured JSON completions by extracting fields and injecting them into an LLM judge prompt
+- [Two-stage training - SFT warm-up before RL](https://docs.adaptive-ml.com/v0.14/harmony/cookbook/training/sft-warmup.md): Sft Warmup
+- [Load datasets and StringThread](https://docs.adaptive-ml.com/v0.14/harmony/datasets.md): How to load Adaptive datasets in your recipes
+- [Create an evaluation recipe](https://docs.adaptive-ml.com/v0.14/harmony/eval.md): Write your own recipe for model evaluation, and log eval artifacts to the product
+- [Custom recipe Graders](https://docs.adaptive-ml.com/v0.14/harmony/graders.md): How to write custom recipe graders
+- [Harmony client and local testing](https://docs.adaptive-ml.com/v0.14/harmony/harmony-client.md): Connect directly to Adaptive Engine locally with a Harmony client
+- [Prerequisites and setup](https://docs.adaptive-ml.com/v0.14/harmony/install.md): Installing the adaptive_harmony python library
+- [Log run metrics](https://docs.adaptive-ml.com/v0.14/harmony/logging.md): Track training metrics with W&B, MLflow, TensorBoard, or console output
+- [Load models](https://docs.adaptive-ml.com/v0.14/harmony/models.md): Loading models in your recipes
+- [Overview](https://docs.adaptive-ml.com/v0.14/harmony/overview.md): Build custom training and evaluation workflows
+- [Load Graders](https://docs.adaptive-ml.com/v0.14/harmony/platform-graders.md): Load existing Graders within your recipe
+- [Progress reporting](https://docs.adaptive-ml.com/v0.14/harmony/progress.md): Report the progress of your recipe to Adaptive
+- [Recipe syntax](https://docs.adaptive-ml.com/v0.14/harmony/recipe-syntax.md): Learn how to write a simple custom recipe
+- [Release notes](https://docs.adaptive-ml.com/v0.14/harmony/release-notes.md): Release notes for adaptive-harmony
+- [Threads](https://docs.adaptive-ml.com/v0.14/harmony/string-thread.md): The core data structure for training and inference in Harmony recipes
+- [Structured generation](https://docs.adaptive-ml.com/v0.14/harmony/structured-output.md): Generate text with Adaptive models that follows a desired JSON schema
+- [Create a training recipe](https://docs.adaptive-ml.com/v0.14/harmony/training.md): How to write your own recipe for model training
+- [Introduction](https://docs.adaptive-ml.com/v0.14/introduction.md): Adaptive Engine documentation
+- [Quickstart](https://docs.adaptive-ml.com/v0.14/quickstart.md): Fine-tune a model in 10 minutes
+- [API reference](https://docs.adaptive-ml.com/v0.14/reference/api.md): REST API reference
+- [SDK reference](https://docs.adaptive-ml.com/v0.14/reference/sdk.md): Python SDK API reference
+
+## OpenAPI Specs
+
+- [openapi](https://docs.adaptive-ml.com/api-reference/openapi.json)

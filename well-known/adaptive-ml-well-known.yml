@@ -1,0 +1,26 @@
+generated: '2026-07-17'
+method: searched
+source: live probes of adaptive-ml.com / www.adaptive-ml.com / docs.adaptive-ml.com
+note: >-
+  No /.well-known discovery documents are published on the marketing/docs hosts.
+  Adaptive Engine is self-hosted, so OIDC/OAuth discovery (if any) lives on each
+  customer deployment, not on a shared host. Absence is valid, expected data.
+hosts:
+- host: https://www.adaptive-ml.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://docs.adaptive-ml.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404

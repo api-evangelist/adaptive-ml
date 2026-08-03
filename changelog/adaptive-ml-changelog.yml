@@ -1,0 +1,51 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.adaptive-ml.com/release-notes
+scheme: semver-minor
+product: Adaptive Engine
+current_version: v0.14.0
+docs: https://docs.adaptive-ml.com/release-notes
+also:
+- product: adaptive-harmony
+  url: https://docs.adaptive-ml.com/v0.14/harmony/release-notes
+entries:
+- version: v0.14.0
+  date: '2026-04-24'
+  breaking: true
+  highlights:
+  - Feedback renamed to Score across SDK, GraphQL API, and database (FeedbackType -> ScoreType).
+  - feedback.* SDK/GraphQL API removed in favor of score.* / metrics.*.
+  - Legacy judge entity removed; migrate to graders (function/prebuilt/judge-as-grader).
+  - New response_format field (plain text, JSON Schema, or Pydantic) for structured output.
+  - New function grader type running a sandboxed Python grade function.
+  - New REST types ResponseFormat, Jobs.delete, Jobs.update, validate_function_grader.
+- version: v0.13.0
+  date: '2026-03-02'
+  breaking: true
+  highlights:
+  - '"Use Cases" renamed to "Projects" across SDK, GraphQL API, REST API, and URL paths.'
+  - feedback.link()/unlink() removed; metrics are now project-scoped.
+  - New client.create_service_account() method.
+  - New built-in recipe for speculative-decoding draft-model alignment.
+- version: v0.12.0
+  date: '2026-01-27'
+  breaking: true
+  highlights:
+  - 'SDK: async attach()/deploy() removed; ModelserviceStatus DETACHED removed.'
+  - New artifacts.download(artifact_id, destination_path) method.
+  - New model registry UI.
+- version: v0.11.0
+  date: '2025-12-15'
+  breaking: false
+  highlights:
+  - New connectivity/health check endpoint (ADAPTIVE_URL/health).
+  - New min_gen_len setter and skip_nan_gradients training argument.
+- version: v0.10.0
+  date: '2025-11-05'
+  breaking: false
+  highlights: []
+- version: v0.9.0
+  date: '2025-10-17'
+  breaking: false
+  highlights:
+  - New recipes-centric use case navigation.

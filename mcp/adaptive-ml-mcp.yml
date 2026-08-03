@@ -1,0 +1,52 @@
+generated: '2026-07-17'
+method: derived
+status: candidate
+source: openapi/adaptive-ml-openapi-original.json
+note: >-
+  No official hosted/remote MCP server was found for Adaptive ML. This is a
+  candidate tool list derived one-per-operation from the Adaptive Engine REST
+  OpenAPI (concorde), for exposing a self-hosted deployment to agents. Auth is a
+  Bearer API key against the deployment base URL (ADAPTIVE_URL/api/v1).
+server:
+  name: adaptive-ml
+  transport: http
+tools:
+- name: chat_completions
+  description: Create a chat completion (OpenAI-compatible), optionally streaming and with response_format.
+  source_operation: openapi/adaptive-ml-openapi-original.json#Chat
+- name: create_embeddings
+  description: Generate embeddings for input text (OpenAI-compatible).
+  source_operation: openapi/adaptive-ml-openapi-original.json#Embeddings
+- name: add_interaction
+  description: Log a prompt/completion interaction.
+  source_operation: openapi/adaptive-ml-openapi-original.json#Add interaction
+- name: add_comparison
+  description: Log a pairwise comparison between completions.
+  source_operation: openapi/adaptive-ml-openapi-original.json#Add comparison
+- name: add_outcome
+  description: Attach an outcome/metric to an interaction.
+  source_operation: openapi/adaptive-ml-openapi-original.json#Add outcome
+- name: download_dataset
+  description: Download a dataset from a project.
+  source_operation: openapi/adaptive-ml-openapi-original.json#Download dataset
+- name: download_recipe
+  description: Download a recipe from a project.
+  source_operation: openapi/adaptive-ml-openapi-original.json#Download recipe
+- name: download_artifact
+  description: Download a run artifact by id.
+  source_operation: openapi/adaptive-ml-openapi-original.json#download_artifact
+- name: download_image
+  description: Download a generated image by project and filename.
+  source_operation: openapi/adaptive-ml-openapi-original.json#download_image
+- name: upload_init
+  description: Initialize a chunked upload session for a large file.
+  source_operation: openapi/adaptive-ml-openapi-original.json#Initialize Chunked Upload
+- name: upload_part
+  description: Upload one part of a chunked upload session.
+  source_operation: openapi/adaptive-ml-openapi-original.json#Upload Part
+- name: upload_status
+  description: Get the status of a chunked upload session.
+  source_operation: openapi/adaptive-ml-openapi-original.json#Get Upload Session Status
+- name: upload_abort
+  description: Abort a chunked upload session.
+  source_operation: openapi/adaptive-ml-openapi-original.json#Abort Chunked Upload

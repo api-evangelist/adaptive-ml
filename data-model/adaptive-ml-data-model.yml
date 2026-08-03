@@ -1,0 +1,57 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/adaptive-ml-openapi-original.json
+description: >-
+  Entity graph derived from the Adaptive Engine REST OpenAPI (concorde) path
+  parameters and request schemas. The richer relational model (models, runs,
+  jobs, graders, metrics) lives in the GraphQL API / Python SDK and is not fully
+  expressed in the REST surface.
+entities:
+- name: Project
+  id_field: project
+  note: Top-level container organizing datasets, recipes, models, and metrics.
+- name: Dataset
+  id_field: dataset_id
+  belongs_to: Project
+  via: project
+- name: Recipe
+  id_field: recipe
+  belongs_to: Project
+  via: project
+- name: Interaction
+  note: A logged prompt/completion record (Add interaction); carries feedback/score.
+- name: Comparison
+  note: A pairwise comparison between completions (Add comparison).
+- name: Outcome
+  note: A recorded outcome/metric attached to an interaction (Add outcome).
+- name: Artifact
+  id_field: artifact_id
+  note: Downloadable output of a run (download_artifact).
+- name: Image
+  id_field: filename
+  belongs_to: Project
+  via: project_id
+- name: UploadSession
+  id_field: session_id
+  note: Chunked-upload session (init/part/status/abort) for large files.
+relationships:
+- from: Dataset
+  to: Project
+  type: belongs_to
+  via: project
+- from: Recipe
+  to: Project
+  type: belongs_to
+  via: project
+- from: Image
+  to: Project
+  type: belongs_to
+  via: project_id
+- from: Project
+  to: Dataset
+  type: has_many
+  via: project
+- from: Project
+  to: Recipe
+  type: has_many
+  via: project

@@ -1,0 +1,39 @@
+generated: '2026-07-17'
+method: searched
+source: https://pypi.org/project/adaptive-sdk/ , https://github.com/adaptive-ml
+packages:
+- language: python
+  registry: pypi
+  name: adaptive-sdk
+  url: https://pypi.org/project/adaptive-sdk/
+  install: pip install adaptive-sdk
+  version: 0.14.2
+  official: true
+  description: Python SDK for Adaptive Engine (inference, datasets, graders, models, recipes, projects, metrics).
+  docs: https://adaptive-ml.github.io/adaptive-sdk-docs/adaptive_sdk.html
+- language: python
+  registry: pypi
+  name: adaptive-harmony
+  url: https://pypi.org/project/adaptive-harmony/
+  install: pip install adaptive-harmony
+  version: 1.1.0
+  official: true
+  description: Harmony training recipes and utilities for LLM fine-tuning on Adaptive Engine.
+  docs: https://docs.adaptive-ml.com/v0.14/harmony/overview
+- language: rust
+  registry: github
+  name: adpt
+  url: https://github.com/adaptive-ml/adpt
+  install: brew install adaptive-ml/tap/adpt
+  official: true
+  description: Command line tool for interacting with the Adaptive Platform.
+- language: shell
+  registry: homebrew
+  name: adaptive-ml/tap
+  url: https://github.com/adaptive-ml/homebrew-tap
+  install: brew tap adaptive-ml/tap
+  official: true
+  description: Homebrew tap distributing the adpt CLI on macOS/Linux.
+notes: >-
+  The Adaptive Chat/Embeddings API is OpenAI-compatible, so the standard OpenAI
+  Python/JS clients also work against an Adaptive deployment (base_url = ADAPTIVE_URL/api/v1).

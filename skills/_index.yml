@@ -1,0 +1,16 @@
+generated: '2026-07-17'
+method: generated
+source: openapi/adaptive-ml-openapi-original.json
+skills:
+- file: adaptive-ml-run-inference.md
+  name: Run inference on an Adaptive Engine model
+  api: openapi/adaptive-ml-openapi-original.json
+  operations: [Chat, Embeddings]
+- file: adaptive-ml-log-feedback.md
+  name: Log interactions and feedback for training/evaluation
+  api: openapi/adaptive-ml-openapi-original.json
+  operations: [Add interaction, Add comparison, Add outcome]
+- file: adaptive-ml-upload-dataset.md
+  name: Upload a large dataset via chunked upload
+  api: openapi/adaptive-ml-openapi-original.json
+  operations: [Initialize Chunked Upload, Upload Part, Get Upload Session Status, Abort Chunked Upload]

@@ -1,0 +1,1556 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "concorde",
+    "description": "",
+    "license": {
+      "name": "UNLICENSED",
+      "identifier": "UNLICENSED"
+    },
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/v1/chat/completions": {
+      "post": {
+        "tags": [
+          "Completions"
+        ],
+        "summary": "Generate chat completion",
+        "description": "Generate a chat completion from a prompt using one model in your project.\nYour prompt messages can include several roles.\nThis endpoints supports streaming",
+        "operationId": "Chat",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "a stream will be returned if `streaming = true` in the request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatResponse"
+                }
+              },
+              "text/event-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatResponseChunk"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/images/{project_id}/{filename}": {
+      "get": {
+        "tags": [
+          "image::rest"
+        ],
+        "operationId": "download_image",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "description": "Project ID the image belongs to",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "filename",
+            "in": "path",
+            "description": "Image filename (hash.ext)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Image file",
+            "content": {
+              "image/*": {}
+            }
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "404": {
+            "description": "Image not found"
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/embeddings": {
+      "post": {
+        "tags": [
+          "Embeddings"
+        ],
+        "operationId": "Embeddings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateEmbeddingsInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmbeddingsResponseList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/interactions": {
+      "post": {
+        "tags": [
+          "Interactions"
+        ],
+        "summary": "Add interaction",
+        "description": "Import an interaction in your project. You can also include feedback about the interaction",
+        "operationId": "Add interaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddInteractionsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Interaction recorded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddInteractionsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/comparison": {
+      "post": {
+        "tags": [
+          "Feedback"
+        ],
+        "summary": "Add comparison",
+        "description": "Register a comparison between two interactions to indicate a preference according to a criteria.\nBoth interactions should share the same prompt.",
+        "operationId": "Add comparison",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddComparisonRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Comparison recorded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComparisonOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/outcome": {
+      "post": {
+        "tags": [
+          "Feedback"
+        ],
+        "summary": "Add outcome",
+        "description": "Register an outcome about a previous user session",
+        "operationId": "Add outcome",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddOutcomeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "outcome recorded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OutcomeOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/artifacts/{artifact_id}/download": {
+      "get": {
+        "tags": [
+          "artifacts::rest"
+        ],
+        "operationId": "download_artifact",
+        "parameters": [
+          {
+            "name": "artifact_id",
+            "in": "path",
+            "description": "Unique identifier for the artifact",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "File download successful",
+            "content": {
+              "application/octet-stream": {}
+            }
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "404": {
+            "description": "Artifact not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/projects/{project}/datasets/{dataset_id}/download": {
+      "get": {
+        "tags": [
+          "Datasets"
+        ],
+        "summary": "Download a dataset file from storage",
+        "description": "Returns the dataset JSONL file as an attachment",
+        "operationId": "Download dataset",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID or key",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/IdOrKey"
+            }
+          },
+          {
+            "name": "dataset",
+            "in": "path",
+            "description": "Dataset ID or key",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/IdOrKey"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "File format: 'recipe' (converted format) or 'original' (as uploaded). Defaults to 'original'. If original file is not available, falls back to recipe format.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dataset_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/IdOrKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dataset file",
+            "content": {
+              "application/x-ndjson": {}
+            }
+          },
+          "403": {
+            "description": "Missing permission"
+          },
+          "404": {
+            "description": "Dataset not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{project}/recipes/{recipe}/download": {
+      "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Download a recipe zip file from storage",
+        "description": "Returns the recipe zip file as an attachment.\nSupports both project-specific recipes and global recipes (available in all projects).",
+        "operationId": "Download recipe",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID or key",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/IdOrKey"
+            }
+          },
+          {
+            "name": "recipe",
+            "in": "path",
+            "description": "Recipe ID or key",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/IdOrKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Recipe zip file",
+            "content": {
+              "application/zip": {}
+            }
+          },
+          "403": {
+            "description": "Missing permission"
+          },
+          "404": {
+            "description": "Recipe not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/upload/init": {
+      "post": {
+        "tags": [
+          "Chunked Upload"
+        ],
+        "summary": "Initialize Chunked Upload",
+        "description": "Start a new chunked upload session for large files. Returns a session ID to be used for uploading parts.",
+        "operationId": "Initialize Chunked Upload",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InitChunkedUploadRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Upload session created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitChunkedUploadResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/upload/part": {
+      "post": {
+        "tags": [
+          "Chunked Upload"
+        ],
+        "summary": "Upload Part",
+        "description": "Upload a single part (chunk) of a file to an existing upload session.",
+        "operationId": "Upload Part",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "query",
+            "description": "Upload session identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "part_number",
+            "in": "query",
+            "description": "Part number (1-indexed)",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Binary chunk data",
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32",
+                  "minimum": 0
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Part uploaded successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/upload/abort": {
+      "delete": {
+        "tags": [
+          "Chunked Upload"
+        ],
+        "summary": "Abort Chunked Upload",
+        "description": "Cancel an ongoing chunked upload session and clean up any uploaded parts.",
+        "operationId": "Abort Chunked Upload",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AbortChunkedUploadRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Upload aborted successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/upload/status": {
+      "post": {
+        "tags": [
+          "Chunked Upload"
+        ],
+        "summary": "Get Upload Session Status",
+        "description": "Cancel an ongoing chunked upload session and clean up any uploaded parts.",
+        "operationId": "Get Upload Session Status",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetUploadSessionStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Upload session status retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUploadSessionStatusResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AbortChunkedUploadRequest": {
+        "type": "object",
+        "required": [
+          "session_id"
+        ],
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "description": "Upload session identifier to abort"
+          }
+        }
+      },
+      "AddComparisonRequest": {
+        "type": "object",
+        "required": [
+          "metric",
+          "preferred_completion",
+          "other_completion",
+          "project"
+        ],
+        "properties": {
+          "metric": {
+            "$ref": "#/components/schemas/IdOrKey"
+          },
+          "messages": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ChatMessageInput"
+            },
+            "description": "Required when using raw text for completion, ignored if using ids"
+          },
+          "preferred_completion": {
+            "$ref": "#/components/schemas/CompletionIdOrText"
+          },
+          "other_completion": {
+            "$ref": "#/components/schemas/CompletionIdOrText"
+          },
+          "tied": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ComparisonTie"
+              }
+            ]
+          },
+          "project": {
+            "$ref": "#/components/schemas/IdOrKey"
+          },
+          "user_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "AddInteractionsRequest": {
+        "type": "object",
+        "required": [
+          "project",
+          "messages",
+          "completion"
+        ],
+        "properties": {
+          "model_service": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/IdOrKey"
+              }
+            ]
+          },
+          "project": {
+            "$ref": "#/components/schemas/IdOrKey"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChatMessageInput"
+            }
+          },
+          "completion": {
+            "type": "string"
+          },
+          "feedbacks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InteractionFeedback"
+            }
+          },
+          "user": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid"
+          },
+          "session_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid"
+          },
+          "created_at": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/InputDateTime"
+              }
+            ]
+          },
+          "ab_campaign": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/IdOrKey"
+              }
+            ]
+          },
+          "labels": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/DictString"
+              }
+            ]
+          }
+        }
+      },
+      "AddInteractionsResponse": {
+        "type": "object",
+        "required": [
+          "completion_id",
+          "session_id",
+          "feedback_ids"
+        ],
+        "properties": {
+          "completion_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "session_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "feedback_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "AddOutcomeRequest": {
+        "type": "object",
+        "required": [
+          "value",
+          "project_id",
+          "metric",
+          "session_id"
+        ],
+        "properties": {
+          "value": {
+            "description": "If the metric is Bool, accepts `0`, `1`, `true` or `false`\nIf the metric is Scalar, accepts number"
+          },
+          "project_id": {
+            "$ref": "#/components/schemas/IdOrKey"
+          },
+          "metric": {
+            "$ref": "#/components/schemas/IdOrKey"
+          },
+          "session_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "user_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "ChatChoice": {
+        "type": "object",
+        "required": [
+          "index",
+          "message",
+          "completion_id",
+          "model"
+        ],
+        "properties": {
+          "index": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          "message": {
+            "$ref": "#/components/schemas/ChatChoiceMessage"
+          },
+          "finish_reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "completion_id": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          }
+        }
+      },
+      "ChatChoiceMessage": {
+        "type": "object",
+        "required": [
+          "id",
+          "role",
+          "content"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          }
+        }
+      },
+      "ChatInput": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GenerateParameters"
+          },
+          {
+            "type": "object",
+            "required": [
+              "messages",
+              "model"
+            ],
+            "properties": {
+              "messages": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ChatMessageInput"
+                }
+              },
+              "model": {
+                "type": "string",
+                "description": "can be of the form `{project}/{model}` or `{project}`. In the latter it will use the default model"
+              },
+              "stream": {
+                "type": "boolean"
+              },
+              "stream_options": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/StreamOptions"
+                  }
+                ]
+              },
+              "session_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "uuid"
+              },
+              "user": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "uuid"
+              },
+              "ab_campaign": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/IdOrKey"
+                  }
+                ]
+              },
+              "n": {
+                "type": "integer",
+                "format": "int32",
+                "minimum": 0
+              },
+              "labels": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DictString"
+                  }
+                ]
+              },
+              "metadata": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DictString",
+                    "description": "alias for labels"
+                  }
+                ]
+              },
+              "system_prompt_args": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "description": "Will be used to render system prompt template",
+                "additionalProperties": {},
+                "propertyNames": {
+                  "type": "string"
+                }
+              },
+              "tags": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              },
+              "use_tools": {
+                "type": "boolean"
+              },
+              "tools": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "$ref": "#/components/schemas/ToolOverride"
+                },
+                "description": "Override tool configuration for this request - enables/disables specific tools"
+              },
+              "store": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "ChatMessageInput": {
+        "type": "object",
+        "required": [
+          "content",
+          "role"
+        ],
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/MessagePackage"
+          },
+          "role": {
+            "type": "string"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "completion_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid"
+          },
+          "metadata": {}
+        }
+      },
+      "ChatResponse": {
+        "type": "object",
+        "required": [
+          "id",
+          "created",
+          "choices",
+          "session_id",
+          "usage"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "created": {
+            "$ref": "#/components/schemas/Timestampsec"
+          },
+          "choices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChatChoice"
+            }
+          },
+          "session_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "usage": {
+            "$ref": "#/components/schemas/Usage"
+          }
+        }
+      },
+      "ChatResponseChunk": {
+        "type": "object",
+        "required": [
+          "id",
+          "choices",
+          "created",
+          "session_id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "choices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Delta"
+            }
+          },
+          "created": {
+            "$ref": "#/components/schemas/Timestampsec"
+          },
+          "session_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "usage": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Usage"
+              }
+            ]
+          }
+        }
+      },
+      "ComparisonOutput": {
+        "type": "object",
+        "required": [
+          "comparison_id"
+        ],
+        "properties": {
+          "comparison_id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "ComparisonTie": {
+        "type": "string",
+        "enum": [
+          "good",
+          "bad"
+        ]
+      },
+      "CompletionIdOrText": {
+        "oneOf": [
+          {
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "type": "object",
+            "required": [
+              "text",
+              "model"
+            ],
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "model": {
+                "$ref": "#/components/schemas/IdOrKey"
+              }
+            }
+          }
+        ]
+      },
+      "Delta": {
+        "type": "object",
+        "required": [
+          "delta",
+          "index",
+          "completion_id"
+        ],
+        "properties": {
+          "delta": {
+            "$ref": "#/components/schemas/ChatChoiceMessage"
+          },
+          "index": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          "completion_id": {
+            "type": "string"
+          },
+          "finish_reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "DictString": {
+        "type": "object",
+        "description": "dictionnary with key and values as string",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "examples": [
+          {
+            "key": "value"
+          }
+        ]
+      },
+      "EmbeddingResponse": {
+        "type": "object",
+        "required": [
+          "index",
+          "embedding"
+        ],
+        "properties": {
+          "index": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          "embedding": {
+            "$ref": "#/components/schemas/EmbeddingsData"
+          }
+        }
+      },
+      "EmbeddingsData": {
+        "oneOf": [
+          {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "EmbeddingsEncodingFormat": {
+        "type": "string",
+        "enum": [
+          "Float",
+          "Base64"
+        ]
+      },
+      "EmbeddingsResponseList": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmbeddingResponse"
+            }
+          },
+          "usage": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Usage"
+              }
+            ]
+          }
+        }
+      },
+      "GenerateChoice": {
+        "type": "object",
+        "required": [
+          "index",
+          "text",
+          "completion_id",
+          "model"
+        ],
+        "properties": {
+          "index": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          "text": {
+            "type": "string"
+          },
+          "completion_id": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "finish_reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "GenerateEmbeddingsInput": {
+        "type": "object",
+        "required": [
+          "input",
+          "model"
+        ],
+        "properties": {
+          "input": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string",
+            "description": "can be of the form '{project}/{model}' or '{project}'. In the latter it will use the default model"
+          },
+          "encoding_format": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EmbeddingsEncodingFormat",
+                "description": "default to float"
+              }
+            ]
+          },
+          "dimensions": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "minimum": 0
+          },
+          "user": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid"
+          },
+          "session_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "GenerateParameters": {
+        "type": "object",
+        "properties": {
+          "stop": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "max_tokens": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "minimum": 0
+          },
+          "temperature": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "float"
+          },
+          "top_p": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "float"
+          },
+          "max_ttft_ms": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int64",
+            "minimum": 0
+          }
+        }
+      },
+      "GetUploadSessionStatusRequest": {
+        "type": "object",
+        "required": [
+          "session_id"
+        ],
+        "properties": {
+          "session_id": {
+            "type": "string"
+          }
+        }
+      },
+      "GetUploadSessionStatusResponse": {
+        "type": "object",
+        "required": [
+          "completed_parts",
+          "total_parts_count"
+        ],
+        "properties": {
+          "completed_parts": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            }
+          },
+          "total_parts_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          }
+        }
+      },
+      "IdOrKey": {
+        "type": "string",
+        "description": "id or key of the entity",
+        "examples": [
+          "76d1fab3-214c-47ef-bb04-16270639bf89"
+        ]
+      },
+      "InitChunkedUploadRequest": {
+        "type": "object",
+        "required": [
+          "total_parts_count"
+        ],
+        "properties": {
+          "content_type": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "MIME type of the file being uploaded"
+          },
+          "metadata": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "Custom metadata to attach to the upload session",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "propertyNames": {
+              "type": "string"
+            }
+          },
+          "total_parts_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total number of parts that will be uploaded",
+            "minimum": 1
+          }
+        }
+      },
+      "InitChunkedUploadResponse": {
+        "type": "object",
+        "required": [
+          "session_id"
+        ],
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "description": "Unique identifier for the upload session"
+          }
+        }
+      },
+      "InputDateTime": {
+        "type": "string",
+        "description": "Input date field",
+        "examples": [
+          "2024-02-21T09:51:03Z"
+        ]
+      },
+      "InteractionFeedback": {
+        "type": "object",
+        "required": [
+          "metric",
+          "value"
+        ],
+        "properties": {
+          "metric": {
+            "$ref": "#/components/schemas/IdOrKey"
+          },
+          "value": {
+            "description": "If the metric is Bool, accepts `0`, `1`, `true` or `false`\nIf the metric is Scalar, accepts number"
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "details": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "created_at": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/InputDateTime"
+              }
+            ]
+          }
+        }
+      },
+      "MessageContentPart": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "text",
+              "type"
+            ],
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "text"
+                ]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "image_url",
+              "type"
+            ],
+            "properties": {
+              "image_url": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "image_url"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "MessagePackage": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MessageContentPart"
+            }
+          }
+        ]
+      },
+      "OutcomeOutput": {
+        "type": "object",
+        "required": [
+          "outcome_id"
+        ],
+        "properties": {
+          "outcome_id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "StreamOptions": {
+        "type": "object",
+        "properties": {
+          "include_usage": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Timestamp": {
+        "type": "number",
+        "description": "Unix Timestamp in milliseconds",
+        "examples": [
+          "1720712536911"
+        ]
+      },
+      "Timestampsec": {
+        "type": "number",
+        "description": "Unix Timestamp in seconds",
+        "examples": [
+          "1720712536"
+        ]
+      },
+      "ToolOverride": {
+        "type": "object",
+        "required": [
+          "id",
+          "enabled"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UploadPartQuery": {
+        "type": "object",
+        "required": [
+          "session_id",
+          "part_number"
+        ],
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "description": "Upload session identifier"
+          },
+          "part_number": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Part number (1-indexed)",
+            "minimum": 1
+          }
+        }
+      },
+      "Usage": {
+        "type": "object",
+        "required": [
+          "completion_tokens",
+          "prompt_tokens",
+          "total_tokens"
+        ],
+        "properties": {
+          "completion_tokens": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          "prompt_tokens": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          "total_tokens": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Interactions",
+      "description": "Load interactions in the db"
+    },
+    {
+      "name": "Chunked Upload",
+      "description": "Upload large files in chunks"
+    },
+    {
+      "name": "Recipes",
+      "description": "Recipe operations"
+    }
+  ]
+}

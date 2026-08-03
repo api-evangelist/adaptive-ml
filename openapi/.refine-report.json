@@ -1,0 +1,30 @@
+{
+  "provider": "adaptive-ml",
+  "sources": [
+    "adaptive-ml-artifacts-rest-api-openapi.yml",
+    "adaptive-ml-chunked-upload-api-openapi.yml",
+    "adaptive-ml-completions-api-openapi.yml",
+    "adaptive-ml-datasets-api-openapi.yml",
+    "adaptive-ml-embeddings-api-openapi.yml",
+    "adaptive-ml-feedback-api-openapi.yml",
+    "adaptive-ml-image-rest-api-openapi.yml",
+    "adaptive-ml-interactions-api-openapi.yml",
+    "adaptive-ml-recipes-api-openapi.yml"
+  ],
+  "outputs": [
+    "adaptive-ml-artifacts-rest-api-openapi.yml",
+    "adaptive-ml-chunked-upload-api-openapi.yml",
+    "adaptive-ml-completions-api-openapi.yml",
+    "adaptive-ml-datasets-api-openapi.yml",
+    "adaptive-ml-embeddings-api-openapi.yml",
+    "adaptive-ml-feedback-api-openapi.yml",
+    "adaptive-ml-image-rest-api-openapi.yml",
+    "adaptive-ml-interactions-api-openapi.yml",
+    "adaptive-ml-recipes-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

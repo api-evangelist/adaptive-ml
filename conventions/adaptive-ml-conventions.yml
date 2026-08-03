@@ -1,0 +1,57 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.adaptive-ml.com/v0.14/reference/api , https://docs.adaptive-ml.com/v0.14/advanced/authentication
+description: Cross-cutting request/response semantics for the Adaptive Engine REST API.
+authentication:
+  style: bearer-api-key
+  header: 'Authorization: Bearer <ADAPTIVE_API_KEY>'
+  ref: authentication/adaptive-ml-authentication.yml
+base_url:
+  pattern: https://<your-adaptive-deployment>/api/v1
+  note: Self-hosted; the host is the customer deployment URL (ADAPTIVE_URL), not a shared SaaS host.
+openai_compatibility:
+  compatible: true
+  note: >-
+    Chat completions and embeddings follow the OpenAI request/response shape;
+    the OpenAI Python/JS clients work by pointing base_url at ADAPTIVE_URL/api/v1.
+  endpoints:
+  - POST /api/v1/chat/completions
+  - POST /api/v1/embeddings
+streaming:
+  supported: true
+  style: server-sent-events
+  note: Chat completions support streamed deltas (ChatResponseChunk / Delta) with StreamOptions.
+structured_output:
+  supported: true
+  field: response_format
+  note: >-
+    Pass plain text, a JSON Schema, or (in Python) a Pydantic model via
+    response_format to constrain model output (added v0.14.0).
+idempotency:
+  supported: false
+  note: >-
+    No documented Idempotency-Key header. Large-file uploads are made
+    idempotent-by-session through explicit chunked-upload session IDs
+    (upload/init -> upload/part -> upload/status, with upload/abort), not via a
+    generic idempotency key.
+pagination:
+  rest: not-documented
+  note: The paginated/list surface lives in the GraphQL API and Python SDK, not the public REST OpenAPI.
+error_envelope:
+  format: http-status
+  statuses_observed: [403, 404, 500]
+  note: >-
+    The REST OpenAPI returns standard HTTP status codes; responses are not
+    application/problem+json (not RFC 9457). See errors/adaptive-ml-problem-types.yml.
+  ref: errors/adaptive-ml-problem-types.yml
+versioning:
+  scheme: doc-versioned
+  current: v0.14
+  api_path_version: v1
+  note: >-
+    REST paths are /api/v1/*; the platform/SDK version (v0.14) is tracked in the
+    docs URL and release notes.
+  ref: lifecycle/adaptive-ml-lifecycle.yml
+rate_limiting:
+  signaling: not-documented
+  note: Self-hosted deployment; no public rate-limit header contract documented.

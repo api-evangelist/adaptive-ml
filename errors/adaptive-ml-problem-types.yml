@@ -1,0 +1,33 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/adaptive-ml-openapi-original.json
+format: http-status
+note: >-
+  Derived from the HTTP status codes declared across the Adaptive Engine REST
+  OpenAPI (concorde). Responses use standard HTTP status codes, not
+  application/problem+json, so this is an HTTP-status error catalog rather than
+  an RFC 9457 problem-type registry.
+problems:
+- status: 403
+  title: Forbidden
+  meaning: Missing or invalid API key, or the key lacks permission for the resource/project.
+  remediation: Provide a valid Authorization Bearer API key with access to the target project/resource.
+  source_operations:
+  - openapi/adaptive-ml-openapi-original.json#download_image
+  - openapi/adaptive-ml-openapi-original.json#download_artifact
+- status: 404
+  title: Not found
+  meaning: The referenced resource (image, artifact, dataset, recipe, upload session) does not exist.
+  remediation: Verify the id/path parameters (project, dataset_id, recipe, artifact_id, filename).
+  source_operations:
+  - openapi/adaptive-ml-openapi-original.json#download_image
+  - openapi/adaptive-ml-openapi-original.json#download_artifact
+  - openapi/adaptive-ml-openapi-original.json#Download dataset
+  - openapi/adaptive-ml-openapi-original.json#Download recipe
+- status: 500
+  title: Internal server error
+  meaning: Unexpected server-side failure processing the request.
+  remediation: Retry; if persistent, contact the deployment administrator / Adaptive support.
+  source_operations:
+  - openapi/adaptive-ml-openapi-original.json#Chat
+  - openapi/adaptive-ml-openapi-original.json#Embeddings
