@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "concorde artifacts::rest Feedback API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Feedback",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add comparison",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://your-adaptive-deployment/api/v1/api/v1/comparison",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register a comparison between two interactions to indicate a preference according to a criteria.\nBoth interactions should share the same prompt."
+        },
+        {
+          "info": {
+            "name": "Add outcome",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://your-adaptive-deployment/api/v1/api/v1/outcome",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register an outcome about a previous user session"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

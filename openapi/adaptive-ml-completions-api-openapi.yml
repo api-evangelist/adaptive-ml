@@ -75,7 +75,8 @@ components:
               $ref: '#/components/schemas/ChatMessageInput'
           model:
             type: string
-            description: can be of the form `{project}/{model}` or `{project}`. In the latter it will use the default model
+            description: can be of the form `{project}/{model}` or `{project}`. In the latter it will
+              use the default model
           stream:
             type: boolean
           stream_options:
@@ -344,3 +345,6 @@ components:
         type: string
       examples:
       - key: value
+servers:
+- url: https://your-adaptive-deployment/api/v1
+  description: Base URL reconciled from apis.yml

@@ -39,3 +39,6 @@ paths:
           description: Image not found
       security:
       - bearer_auth: []
+servers:
+- url: https://your-adaptive-deployment/api/v1
+  description: Base URL reconciled from apis.yml

@@ -1,0 +1,42 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "concorde artifacts::rest image::rest API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "image::rest",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "download_image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-adaptive-deployment/api/v1/images/:project_id/:filename",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Project ID the image belongs to"
+              },
+              {
+                "name": "filename",
+                "value": "",
+                "type": "path",
+                "description": "Image filename (hash.ext)"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

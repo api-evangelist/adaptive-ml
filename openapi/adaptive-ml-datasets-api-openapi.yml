@@ -31,7 +31,8 @@ paths:
           $ref: '#/components/schemas/IdOrKey'
       - name: format
         in: query
-        description: 'File format: ''recipe'' (converted format) or ''original'' (as uploaded). Defaults to ''original''. If original file is not available, falls back to recipe format.'
+        description: 'File format: ''recipe'' (converted format) or ''original'' (as uploaded). Defaults
+          to ''original''. If original file is not available, falls back to recipe format.'
         required: false
         schema:
           type: string
@@ -58,3 +59,6 @@ components:
       description: id or key of the entity
       examples:
       - 76d1fab3-214c-47ef-bb04-16270639bf89
+servers:
+- url: https://your-adaptive-deployment/api/v1
+  description: Base URL reconciled from apis.yml

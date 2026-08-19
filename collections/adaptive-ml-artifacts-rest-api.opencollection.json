@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "concorde artifacts::rest API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "artifacts::rest",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "download_artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-adaptive-deployment/api/v1/artifacts/:artifact_id/download",
+            "params": [
+              {
+                "name": "artifact_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the artifact"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

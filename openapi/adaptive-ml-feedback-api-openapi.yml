@@ -14,7 +14,8 @@ paths:
       tags:
       - Feedback
       summary: Add comparison
-      description: 'Register a comparison between two interactions to indicate a preference according to a criteria.
+      description: 'Register a comparison between two interactions to indicate a preference according
+        to a criteria.
 
         Both interactions should share the same prompt.'
       operationId: Add comparison
@@ -198,3 +199,6 @@ components:
       - type: array
         items:
           $ref: '#/components/schemas/MessageContentPart'
+servers:
+- url: https://your-adaptive-deployment/api/v1
+  description: Base URL reconciled from apis.yml

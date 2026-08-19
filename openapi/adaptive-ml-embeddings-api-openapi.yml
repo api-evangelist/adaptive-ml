@@ -63,7 +63,8 @@ components:
           type: string
         model:
           type: string
-          description: can be of the form '{project}/{model}' or '{project}'. In the latter it will use the default model
+          description: can be of the form '{project}/{model}' or '{project}'. In the latter it will use
+            the default model
         encoding_format:
           oneOf:
           - type: 'null'
@@ -117,3 +118,6 @@ components:
           oneOf:
           - type: 'null'
           - $ref: '#/components/schemas/Usage'
+servers:
+- url: https://your-adaptive-deployment/api/v1
+  description: Base URL reconciled from apis.yml

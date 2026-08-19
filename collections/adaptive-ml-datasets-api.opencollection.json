@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "concorde artifacts::rest Datasets API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download a dataset file from storage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-adaptive-deployment/api/v1/api/v1/projects/:project/datasets/:dataset_id/download",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path",
+                "description": "Project ID or key"
+              },
+              {
+                "name": "dataset",
+                "value": "",
+                "type": "path",
+                "description": "Dataset ID or key"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "File format: 'recipe' (converted format) or 'original' (as uploaded). Defaults to 'original'. If original file is not available, falls back to recipe format."
+              },
+              {
+                "name": "dataset_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the dataset JSONL file as an attachment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

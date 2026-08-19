@@ -1,0 +1,129 @@
+{
+  "item": [
+    {
+      "id": "617a5ecf-9c46-4ca1-8ae0-0791782d9865",
+      "name": "Completions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2db80082-8921-493d-ae72-e4a7d670a301",
+          "name": "Generate chat completion",
+          "request": {
+            "name": "Generate chat completion",
+            "description": {
+              "content": "Generate a chat completion from a prompt using one model in your project.\nYour prompt messages can include several roles.\nThis endpoints supports streaming",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "chat",
+                "completions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messages\": [\n    {\n      \"content\": \"<string>\",\n      \"role\": \"<string>\",\n      \"name\": \"<string,null>\",\n      \"completion_id\": \"<string,null-uuid>\",\n      \"metadata\": \"\"\n    },\n    {\n      \"content\": \"<string>\",\n      \"role\": \"<string>\",\n      \"name\": \"<string,null>\",\n      \"completion_id\": \"<string,null-uuid>\",\n      \"metadata\": \"\"\n    }\n  ],\n  \"model\": \"<string>\",\n  \"stop\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"max_tokens\": \"<integer,null-int32>\",\n  \"temperature\": \"<number,null-float>\",\n  \"top_p\": \"<number,null-float>\",\n  \"max_ttft_ms\": \"<integer,null-int64>\",\n  \"stream\": \"<boolean>\",\n  \"stream_options\": \"<null>\",\n  \"session_id\": \"<string,null-uuid>\",\n  \"user\": \"<string,null-uuid>\",\n  \"ab_campaign\": \"<null>\",\n  \"n\": \"<integer>\",\n  \"labels\": \"<null>\",\n  \"metadata\": \"<null>\",\n  \"system_prompt_args\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"use_tools\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"id\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"store\": \"<boolean,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "55c7ac97-2e38-4653-92ec-97a3a538b46f",
+              "name": "a stream will be returned if `streaming = true` in the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "chat",
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"content\": \"string\",\n      \"role\": \"string\",\n      \"name\": \"string\",\n      \"completion_id\": \"d159ea33-3f08-ba54-fa26-50937102d12c\",\n      \"metadata\": \"\"\n    },\n    {\n      \"content\": \"string\",\n      \"role\": \"string\",\n      \"name\": \"string\",\n      \"completion_id\": \"af641680-4146-7992-1943-9ed9e201be3e\",\n      \"metadata\": \"\"\n    }\n  ],\n  \"model\": \"<string>\",\n  \"stop\": [\n    \"string\",\n    \"string\"\n  ],\n  \"max_tokens\": 875,\n  \"temperature\": 4293.506815963894,\n  \"top_p\": 486.1078260441765,\n  \"max_ttft_ms\": 5153,\n  \"stream\": \"<boolean>\",\n  \"stream_options\": \"<null>\",\n  \"session_id\": \"<string,null-uuid>\",\n  \"user\": \"<string,null-uuid>\",\n  \"ab_campaign\": \"<null>\",\n  \"n\": \"<integer>\",\n  \"labels\": \"<null>\",\n  \"metadata\": \"<null>\",\n  \"system_prompt_args\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {},\n    \"key_3\": {}\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"use_tools\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"id\": \"string\",\n      \"enabled\": true\n    },\n    {\n      \"id\": \"string\",\n      \"enabled\": true\n    }\n  ],\n  \"store\": \"<boolean,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"created\": 5899.3782213115,\n  \"choices\": [\n    {\n      \"index\": 7260,\n      \"message\": {\n        \"id\": \"string\",\n        \"role\": \"string\",\n        \"content\": \"string\"\n      },\n      \"completion_id\": \"string\",\n      \"model\": \"string\",\n      \"finish_reason\": \"string\"\n    },\n    {\n      \"index\": 7274,\n      \"message\": {\n        \"id\": \"string\",\n        \"role\": \"string\",\n        \"content\": \"string\"\n      },\n      \"completion_id\": \"string\",\n      \"model\": \"string\",\n      \"finish_reason\": \"string\"\n    }\n  ],\n  \"session_id\": \"e11b84d8-6d2b-144c-ed4d-0bc0769ff5ee\",\n  \"usage\": {\n    \"completion_tokens\": 564,\n    \"prompt_tokens\": 4103,\n    \"total_tokens\": 6476\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://your-adaptive-deployment/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "54b06817-1374-477b-b852-fd430f4556fe",
+    "name": "concorde artifacts::rest Completions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

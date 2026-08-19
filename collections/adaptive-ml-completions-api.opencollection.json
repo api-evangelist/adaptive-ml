@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "concorde artifacts::rest Completions API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Completions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate chat completion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://your-adaptive-deployment/api/v1/api/v1/chat/completions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a chat completion from a prompt using one model in your project.\nYour prompt messages can include several roles.\nThis endpoints supports streaming"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

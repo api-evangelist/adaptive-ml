@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "concorde artifacts::rest Chunked Upload API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Chunked Upload",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Initialize Chunked Upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://your-adaptive-deployment/api/v1/api/v1/upload/init",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start a new chunked upload session for large files. Returns a session ID to be used for uploading parts."
+        },
+        {
+          "info": {
+            "name": "Upload Part",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://your-adaptive-deployment/api/v1/api/v1/upload/part",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "query",
+                "description": "Upload session identifier"
+              },
+              {
+                "name": "part_number",
+                "value": "",
+                "type": "query",
+                "description": "Part number (1-indexed)"
+              }
+            ]
+          },
+          "docs": "Upload a single part (chunk) of a file to an existing upload session."
+        },
+        {
+          "info": {
+            "name": "Abort Chunked Upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://your-adaptive-deployment/api/v1/api/v1/upload/abort",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel an ongoing chunked upload session and clean up any uploaded parts."
+        },
+        {
+          "info": {
+            "name": "Get Upload Session Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://your-adaptive-deployment/api/v1/api/v1/upload/status",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel an ongoing chunked upload session and clean up any uploaded parts."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

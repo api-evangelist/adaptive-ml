@@ -2,11 +2,9 @@ generated: '2026-07-17'
 method: derived
 status: candidate
 source: openapi/adaptive-ml-openapi-original.json
-note: >-
-  No official hosted/remote MCP server was found for Adaptive ML. This is a
-  candidate tool list derived one-per-operation from the Adaptive Engine REST
-  OpenAPI (concorde), for exposing a self-hosted deployment to agents. Auth is a
-  Bearer API key against the deployment base URL (ADAPTIVE_URL/api/v1).
+note: No official hosted/remote MCP server was found for Adaptive ML. This is a candidate tool list derived
+  one-per-operation from the Adaptive Engine REST OpenAPI (concorde), for exposing a self-hosted deployment
+  to agents. Auth is a Bearer API key against the deployment base URL (ADAPTIVE_URL/api/v1).
 server:
   name: adaptive-ml
   transport: http
@@ -50,3 +48,9 @@ tools:
 - name: upload_abort
   description: Abort a chunked upload session.
   source_operation: openapi/adaptive-ml-openapi-original.json#Abort Chunked Upload
+deployment:
+  mode: none
+  verified: derived
+  tools: 13
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -50,3 +50,6 @@ components:
       description: id or key of the entity
       examples:
       - 76d1fab3-214c-47ef-bb04-16270639bf89
+servers:
+- url: https://your-adaptive-deployment/api/v1
+  description: Base URL reconciled from apis.yml

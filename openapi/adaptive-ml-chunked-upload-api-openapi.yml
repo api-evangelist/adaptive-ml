@@ -15,7 +15,8 @@ paths:
       tags:
       - Chunked Upload
       summary: Initialize Chunked Upload
-      description: Start a new chunked upload session for large files. Returns a session ID to be used for uploading parts.
+      description: Start a new chunked upload session for large files. Returns a session ID to be used
+        for uploading parts.
       operationId: Initialize Chunked Upload
       requestBody:
         content:
@@ -167,3 +168,6 @@ components:
       properties:
         session_id:
           type: string
+servers:
+- url: https://your-adaptive-deployment/api/v1
+  description: Base URL reconciled from apis.yml

@@ -1,0 +1,123 @@
+{
+  "item": [
+    {
+      "id": "e6bca757-ca60-4687-a8ce-fb7de6f66777",
+      "name": "Embeddings",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8b5bb536-a50a-440f-9501-2c9c004c1977",
+          "name": "Embeddings",
+          "request": {
+            "name": "Embeddings",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "embeddings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"input\": \"<string>\",\n  \"model\": \"<string>\",\n  \"encoding_format\": \"<null>\",\n  \"dimensions\": \"<integer,null-int32>\",\n  \"user\": \"<string,null-uuid>\",\n  \"session_id\": \"<string,null-uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "96fb8729-ca6e-402b-863f-3daaaaa55369",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "embeddings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"input\": \"<string>\",\n  \"model\": \"<string>\",\n  \"encoding_format\": \"<null>\",\n  \"dimensions\": \"<integer,null-int32>\",\n  \"user\": \"<string,null-uuid>\",\n  \"session_id\": \"<string,null-uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"index\": 82,\n      \"embedding\": [\n        4897.4124752423295,\n        2114.741227241288\n      ]\n    },\n    {\n      \"index\": 2605,\n      \"embedding\": [\n        4177.577562157751,\n        6394.822592643584\n      ]\n    }\n  ],\n  \"usage\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://your-adaptive-deployment/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a1261e8d-edba-4661-965b-a6b831411cb3",
+    "name": "concorde artifacts::rest Embeddings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

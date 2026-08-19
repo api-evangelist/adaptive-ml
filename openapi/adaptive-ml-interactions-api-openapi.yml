@@ -186,3 +186,6 @@ components:
       - type: array
         items:
           $ref: '#/components/schemas/MessageContentPart'
+servers:
+- url: https://your-adaptive-deployment/api/v1
+  description: Base URL reconciled from apis.yml

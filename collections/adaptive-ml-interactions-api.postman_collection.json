@@ -1,0 +1,127 @@
+{
+  "item": [
+    {
+      "id": "a73ae55e-aad8-4040-9e50-f643d9479b0d",
+      "name": "Interactions",
+      "description": {
+        "content": "Load interactions in the db",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d86b357f-80d7-4c13-bff2-62380d6697d0",
+          "name": "Add interaction",
+          "request": {
+            "name": "Add interaction",
+            "description": {
+              "content": "Import an interaction in your project. You can also include feedback about the interaction",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "interactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project\": \"<string>\",\n  \"messages\": [\n    {\n      \"content\": \"<string>\",\n      \"role\": \"<string>\",\n      \"name\": \"<string,null>\",\n      \"completion_id\": \"<string,null-uuid>\",\n      \"metadata\": \"\"\n    },\n    {\n      \"content\": \"<string>\",\n      \"role\": \"<string>\",\n      \"name\": \"<string,null>\",\n      \"completion_id\": \"<string,null-uuid>\",\n      \"metadata\": \"\"\n    }\n  ],\n  \"completion\": \"<string>\",\n  \"model_service\": \"<null>\",\n  \"feedbacks\": [\n    {\n      \"metric\": \"<string>\",\n      \"value\": {},\n      \"reason\": \"<string,null>\",\n      \"details\": \"<string,null>\",\n      \"created_at\": \"<null>\"\n    },\n    {\n      \"metric\": \"<string>\",\n      \"value\": {},\n      \"reason\": \"<string,null>\",\n      \"details\": \"<string,null>\",\n      \"created_at\": \"<null>\"\n    }\n  ],\n  \"user\": \"<string,null-uuid>\",\n  \"session_id\": \"<string,null-uuid>\",\n  \"created_at\": \"<null>\",\n  \"ab_campaign\": \"<null>\",\n  \"labels\": \"<null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b28b90fb-d85f-4f61-a2ba-29fb1572793c",
+              "name": "Interaction recorded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "interactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project\": \"76d1fab3-214c-47ef-bb04-16270639bf89\",\n  \"messages\": [\n    {\n      \"content\": \"string\",\n      \"role\": \"string\",\n      \"name\": \"string\",\n      \"completion_id\": \"b1f5f0c6-bbab-c1fb-3804-7f4c9dee8d7a\",\n      \"metadata\": \"\"\n    },\n    {\n      \"content\": \"string\",\n      \"role\": \"string\",\n      \"name\": \"string\",\n      \"completion_id\": \"ef86475c-4621-193f-6446-fa431601c6f4\",\n      \"metadata\": \"\"\n    }\n  ],\n  \"completion\": \"<string>\",\n  \"model_service\": \"<null>\",\n  \"feedbacks\": [\n    {\n      \"metric\": \"76d1fab3-214c-47ef-bb04-16270639bf89\",\n      \"value\": {},\n      \"reason\": \"string\",\n      \"details\": \"string\",\n      \"created_at\": null\n    },\n    {\n      \"metric\": \"76d1fab3-214c-47ef-bb04-16270639bf89\",\n      \"value\": {},\n      \"reason\": \"string\",\n      \"details\": \"string\",\n      \"created_at\": null\n    }\n  ],\n  \"user\": \"<string,null-uuid>\",\n  \"session_id\": \"<string,null-uuid>\",\n  \"created_at\": \"<null>\",\n  \"ab_campaign\": \"<null>\",\n  \"labels\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"completion_id\": \"371624ea-04f0-3bea-d3ea-cc362d0ac2e2\",\n  \"session_id\": \"74e6db76-76eb-7a26-c839-4c03c345a130\",\n  \"feedback_ids\": [\n    \"9e354e77-a9aa-4c79-ba0a-c02f44b1fe05\",\n    \"c280c072-e046-04bc-61a5-88010befa348\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://your-adaptive-deployment/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "33982870-229e-4ae4-94b8-a0f23134aa4c",
+    "name": "concorde artifacts::rest Interactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Load interactions in the db",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "concorde artifacts::rest Interactions API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Interactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add interaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://your-adaptive-deployment/api/v1/api/v1/interactions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import an interaction in your project. You can also include feedback about the interaction"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

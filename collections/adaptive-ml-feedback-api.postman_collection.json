@@ -1,0 +1,222 @@
+{
+  "item": [
+    {
+      "id": "95e20e6b-499c-41dd-93e2-55fa573e7b20",
+      "name": "Feedback",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b679149b-4b9b-4c70-b5e6-0a69e8141e36",
+          "name": "Add comparison",
+          "request": {
+            "name": "Add comparison",
+            "description": {
+              "content": "Register a comparison between two interactions to indicate a preference according to a criteria.\nBoth interactions should share the same prompt.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "comparison"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metric\": \"<string>\",\n  \"preferred_completion\": \"<uuid>\",\n  \"other_completion\": \"<uuid>\",\n  \"project\": \"<string>\",\n  \"messages\": [\n    {\n      \"content\": \"<string>\",\n      \"role\": \"<string>\",\n      \"name\": \"<string,null>\",\n      \"completion_id\": \"<string,null-uuid>\",\n      \"metadata\": \"\"\n    },\n    {\n      \"content\": \"<string>\",\n      \"role\": \"<string>\",\n      \"name\": \"<string,null>\",\n      \"completion_id\": \"<string,null-uuid>\",\n      \"metadata\": \"\"\n    }\n  ],\n  \"tied\": \"<null>\",\n  \"user_id\": \"<string,null-uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "263385b4-647b-46de-8df5-96c8a3907681",
+              "name": "Comparison recorded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "comparison"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metric\": \"76d1fab3-214c-47ef-bb04-16270639bf89\",\n  \"preferred_completion\": \"29f76a54-5024-7c01-0240-db58cf0bfb10\",\n  \"other_completion\": \"1eb4ef95-b7e9-2d43-2e29-c9f3337279e2\",\n  \"project\": \"76d1fab3-214c-47ef-bb04-16270639bf89\",\n  \"messages\": [\n    {\n      \"content\": \"string\",\n      \"role\": \"string\",\n      \"name\": \"string\",\n      \"completion_id\": \"677fa8fe-fb64-5f04-f655-1a38a334fb52\",\n      \"metadata\": \"\"\n    },\n    {\n      \"content\": \"string\",\n      \"role\": \"string\",\n      \"name\": \"string\",\n      \"completion_id\": \"a6d0356b-6c90-e86b-0f56-0a45f1ea0bfb\",\n      \"metadata\": \"\"\n    }\n  ],\n  \"tied\": \"<null>\",\n  \"user_id\": \"<string,null-uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"comparison_id\": \"55ed7737-2a5f-e8bc-dbe5-ef8c007f876c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ee98230-8052-4956-9ac3-a2b62d9df7d7",
+          "name": "Add outcome",
+          "request": {
+            "name": "Add outcome",
+            "description": {
+              "content": "Register an outcome about a previous user session",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "outcome"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"value\": {},\n  \"project_id\": \"<string>\",\n  \"metric\": \"<string>\",\n  \"session_id\": \"<uuid>\",\n  \"user_id\": \"<string,null-uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8d295ef1-5510-4043-aba7-6b9667ef6bab",
+              "name": "outcome recorded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "outcome"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": {},\n  \"project_id\": \"76d1fab3-214c-47ef-bb04-16270639bf89\",\n  \"metric\": \"76d1fab3-214c-47ef-bb04-16270639bf89\",\n  \"session_id\": \"<uuid>\",\n  \"user_id\": \"<string,null-uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"outcome_id\": \"790ef11d-e3c5-2870-ccb2-693d4b6ebcbf\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://your-adaptive-deployment/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d5e71c70-37e6-4c6e-b9d6-c08f66d9effc",
+    "name": "concorde artifacts::rest Feedback API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}
