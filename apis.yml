@@ -187,6 +187,11 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: ParentCompany
+  url: https://apis.io/providers/datadog/
+  name: Datadog
+  x-relationship: acquired
+  x-evidence: "Adaptive ML was acquired by Datadog."
 - type: Website
   url: https://www.adaptive-ml.com
 - type: DeveloperPortal
