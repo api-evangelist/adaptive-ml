@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: concorde artifacts::rest Completions API
+  title: concorde Completions API
   description: ''
   license:
     name: UNLICENSED
@@ -38,6 +38,28 @@ paths:
                 $ref: '#/components/schemas/ChatResponseChunk'
 components:
   schemas:
+    ChatChoice:
+      type: object
+      required:
+      - index
+      - message
+      - completion_id
+      - model
+      properties:
+        index:
+          type: integer
+          format: int32
+          minimum: 0
+        message:
+          $ref: '#/components/schemas/ChatChoiceMessage'
+        finish_reason:
+          type:
+          - string
+          - 'null'
+        completion_id:
+          type: string
+        model:
+          type: string
     ChatResponseChunk:
       type: object
       required:
@@ -61,6 +83,137 @@ components:
           oneOf:
           - type: 'null'
           - $ref: '#/components/schemas/Usage'
+    Delta:
+      type: object
+      required:
+      - delta
+      - index
+      - completion_id
+      properties:
+        delta:
+          $ref: '#/components/schemas/ChatChoiceMessage'
+        index:
+          type: integer
+          format: int32
+          minimum: 0
+        completion_id:
+          type: string
+        finish_reason:
+          type:
+          - string
+          - 'null'
+    ChatChoiceMessage:
+      type: object
+      required:
+      - id
+      - role
+      - content
+      properties:
+        id:
+          type: string
+        role:
+          type: string
+        content:
+          type: string
+    IdOrKey:
+      type: string
+      description: id or key of the entity
+      examples:
+      - 76d1fab3-214c-47ef-bb04-16270639bf89
+    MessageContentPart:
+      oneOf:
+      - type: object
+        required:
+        - text
+        - type
+        properties:
+          text:
+            type: string
+          type:
+            type: string
+            enum:
+            - text
+      - type: object
+        required:
+        - image_url
+        - type
+        properties:
+          image_url:
+            type: string
+          type:
+            type: string
+            enum:
+            - image_url
+    GenerateParameters:
+      type: object
+      properties:
+        stop:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        max_tokens:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+        temperature:
+          type:
+          - number
+          - 'null'
+          format: float
+        top_p:
+          type:
+          - number
+          - 'null'
+          format: float
+        max_ttft_ms:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+    ToolOverride:
+      type: object
+      required:
+      - id
+      - enabled
+      properties:
+        id:
+          type: string
+        enabled:
+          type: boolean
+    DictString:
+      type: object
+      description: dictionnary with key and values as string
+      additionalProperties:
+        type: string
+      examples:
+      - key: value
+    ChatResponse:
+      type: object
+      required:
+      - id
+      - created
+      - choices
+      - session_id
+      - usage
+      properties:
+        id:
+          type: string
+        created:
+          $ref: '#/components/schemas/Timestampsec'
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatChoice'
+        session_id:
+          type: string
+          format: uuid
+        usage:
+          $ref: '#/components/schemas/Usage'
     ChatInput:
       allOf:
       - $ref: '#/components/schemas/GenerateParameters'
@@ -75,8 +228,7 @@ components:
               $ref: '#/components/schemas/ChatMessageInput'
           model:
             type: string
-            description: can be of the form `{project}/{model}` or `{project}`. In the latter it will
-              use the default model
+            description: can be of the form `{project}/{model}` or `{project}`. In the latter it will use the default model
           stream:
             type: boolean
           stream_options:
@@ -137,35 +289,22 @@ components:
             type:
             - boolean
             - 'null'
-    MessageContentPart:
+    MessagePackage:
       oneOf:
-      - type: object
-        required:
-        - text
-        - type
-        properties:
-          text:
-            type: string
-          type:
-            type: string
-            enum:
-            - text
-      - type: object
-        required:
-        - image_url
-        - type
-        properties:
-          image_url:
-            type: string
-          type:
-            type: string
-            enum:
-            - image_url
-    IdOrKey:
-      type: string
-      description: id or key of the entity
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/MessageContentPart'
+    StreamOptions:
+      type: object
+      properties:
+        include_usage:
+          type: boolean
+    Timestampsec:
+      type: number
+      description: Unix Timestamp in seconds
       examples:
-      - 76d1fab3-214c-47ef-bb04-16270639bf89
+      - '1720712536'
     Usage:
       type: object
       required:
@@ -185,68 +324,6 @@ components:
           type: integer
           format: int32
           minimum: 0
-    ToolOverride:
-      type: object
-      required:
-      - id
-      - enabled
-      properties:
-        id:
-          type: string
-        enabled:
-          type: boolean
-    Delta:
-      type: object
-      required:
-      - delta
-      - index
-      - completion_id
-      properties:
-        delta:
-          $ref: '#/components/schemas/ChatChoiceMessage'
-        index:
-          type: integer
-          format: int32
-          minimum: 0
-        completion_id:
-          type: string
-        finish_reason:
-          type:
-          - string
-          - 'null'
-    ChatResponse:
-      type: object
-      required:
-      - id
-      - created
-      - choices
-      - session_id
-      - usage
-      properties:
-        id:
-          type: string
-        created:
-          $ref: '#/components/schemas/Timestampsec'
-        choices:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatChoice'
-        session_id:
-          type: string
-          format: uuid
-        usage:
-          $ref: '#/components/schemas/Usage'
-    Timestampsec:
-      type: number
-      description: Unix Timestamp in seconds
-      examples:
-      - '1720712536'
-    MessagePackage:
-      oneOf:
-      - type: string
-      - type: array
-        items:
-          $ref: '#/components/schemas/MessageContentPart'
     ChatMessageInput:
       type: object
       required:
@@ -267,84 +344,3 @@ components:
           - 'null'
           format: uuid
         metadata: {}
-    StreamOptions:
-      type: object
-      properties:
-        include_usage:
-          type: boolean
-    ChatChoice:
-      type: object
-      required:
-      - index
-      - message
-      - completion_id
-      - model
-      properties:
-        index:
-          type: integer
-          format: int32
-          minimum: 0
-        message:
-          $ref: '#/components/schemas/ChatChoiceMessage'
-        finish_reason:
-          type:
-          - string
-          - 'null'
-        completion_id:
-          type: string
-        model:
-          type: string
-    GenerateParameters:
-      type: object
-      properties:
-        stop:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        max_tokens:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          minimum: 0
-        temperature:
-          type:
-          - number
-          - 'null'
-          format: float
-        top_p:
-          type:
-          - number
-          - 'null'
-          format: float
-        max_ttft_ms:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          minimum: 0
-    ChatChoiceMessage:
-      type: object
-      required:
-      - id
-      - role
-      - content
-      properties:
-        id:
-          type: string
-        role:
-          type: string
-        content:
-          type: string
-    DictString:
-      type: object
-      description: dictionnary with key and values as string
-      additionalProperties:
-        type: string
-      examples:
-      - key: value
-servers:
-- url: https://your-adaptive-deployment/api/v1
-  description: Base URL reconciled from apis.yml

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: concorde artifacts::rest Interactions API
+  title: concorde Interactions API
   description: Load interactions in the db
   license:
     name: UNLICENSED
@@ -32,6 +32,24 @@ paths:
                 $ref: '#/components/schemas/AddInteractionsResponse'
 components:
   schemas:
+    AddInteractionsResponse:
+      type: object
+      required:
+      - completion_id
+      - session_id
+      - feedback_ids
+      properties:
+        completion_id:
+          type: string
+          format: uuid
+        session_id:
+          type: string
+          format: uuid
+        feedback_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
     IdOrKey:
       type: string
       description: id or key of the entity
@@ -61,73 +79,18 @@ components:
             type: string
             enum:
             - image_url
-    AddInteractionsResponse:
-      type: object
-      required:
-      - completion_id
-      - session_id
-      - feedback_ids
-      properties:
-        completion_id:
-          type: string
-          format: uuid
-        session_id:
-          type: string
-          format: uuid
-        feedback_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-    InteractionFeedback:
-      type: object
-      required:
-      - metric
-      - value
-      properties:
-        metric:
-          $ref: '#/components/schemas/IdOrKey'
-        value:
-          description: 'If the metric is Bool, accepts `0`, `1`, `true` or `false`
-
-            If the metric is Scalar, accepts number'
-        reason:
-          type:
-          - string
-          - 'null'
-        details:
-          type:
-          - string
-          - 'null'
-        created_at:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/InputDateTime'
     InputDateTime:
       type: string
       description: Input date field
       examples:
       - '2024-02-21T09:51:03Z'
-    ChatMessageInput:
+    DictString:
       type: object
-      required:
-      - content
-      - role
-      properties:
-        content:
-          $ref: '#/components/schemas/MessagePackage'
-        role:
-          type: string
-        name:
-          type:
-          - string
-          - 'null'
-        completion_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        metadata: {}
+      description: dictionnary with key and values as string
+      additionalProperties:
+        type: string
+      examples:
+      - key: value
     AddInteractionsRequest:
       type: object
       required:
@@ -173,19 +136,53 @@ components:
           oneOf:
           - type: 'null'
           - $ref: '#/components/schemas/DictString'
-    DictString:
-      type: object
-      description: dictionnary with key and values as string
-      additionalProperties:
-        type: string
-      examples:
-      - key: value
     MessagePackage:
       oneOf:
       - type: string
       - type: array
         items:
           $ref: '#/components/schemas/MessageContentPart'
-servers:
-- url: https://your-adaptive-deployment/api/v1
-  description: Base URL reconciled from apis.yml
+    InteractionFeedback:
+      type: object
+      required:
+      - metric
+      - value
+      properties:
+        metric:
+          $ref: '#/components/schemas/IdOrKey'
+        value:
+          description: 'If the metric is Bool, accepts `0`, `1`, `true` or `false`
+
+            If the metric is Scalar, accepts number'
+        reason:
+          type:
+          - string
+          - 'null'
+        details:
+          type:
+          - string
+          - 'null'
+        created_at:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/InputDateTime'
+    ChatMessageInput:
+      type: object
+      required:
+      - content
+      - role
+      properties:
+        content:
+          $ref: '#/components/schemas/MessagePackage'
+        role:
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        completion_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        metadata: {}

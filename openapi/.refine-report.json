@@ -1,30 +1,42 @@
 {
   "provider": "adaptive-ml",
   "sources": [
-    "adaptive-ml-artifacts-rest-api-openapi.yml",
-    "adaptive-ml-chunked-upload-api-openapi.yml",
-    "adaptive-ml-completions-api-openapi.yml",
-    "adaptive-ml-datasets-api-openapi.yml",
-    "adaptive-ml-embeddings-api-openapi.yml",
-    "adaptive-ml-feedback-api-openapi.yml",
-    "adaptive-ml-image-rest-api-openapi.yml",
-    "adaptive-ml-interactions-api-openapi.yml",
-    "adaptive-ml-recipes-api-openapi.yml"
+    "_original/adaptive-ml-openapi-original.json"
   ],
   "outputs": [
-    "adaptive-ml-artifacts-rest-api-openapi.yml",
     "adaptive-ml-chunked-upload-api-openapi.yml",
     "adaptive-ml-completions-api-openapi.yml",
     "adaptive-ml-datasets-api-openapi.yml",
     "adaptive-ml-embeddings-api-openapi.yml",
     "adaptive-ml-feedback-api-openapi.yml",
-    "adaptive-ml-image-rest-api-openapi.yml",
     "adaptive-ml-interactions-api-openapi.yml",
-    "adaptive-ml-recipes-api-openapi.yml"
+    "adaptive-ml-recipes-api-openapi.yml",
+    "adaptive-ml-artifacts-rest-api-openapi.yml",
+    "adaptive-ml-image-rest-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "adaptive-ml-openapi-original.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "adaptive-ml-openapi-original.json: declared missing tag: Completions",
+    "adaptive-ml-openapi-original.json: declared missing tag: Datasets",
+    "adaptive-ml-openapi-original.json: declared missing tag: Embeddings",
+    "adaptive-ml-openapi-original.json: declared missing tag: Feedback",
+    "adaptive-ml-openapi-original.json: declared missing tag: artifacts::rest",
+    "adaptive-ml-openapi-original.json: declared missing tag: image::rest",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "adaptive-ml-artifacts-rest-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adaptive-ml-chunked-upload-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adaptive-ml-completions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adaptive-ml-datasets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adaptive-ml-embeddings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adaptive-ml-feedback-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adaptive-ml-image-rest-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adaptive-ml-interactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adaptive-ml-recipes-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
