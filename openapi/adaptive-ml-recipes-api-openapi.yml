@@ -18,7 +18,7 @@ paths:
       description: 'Returns the recipe zip file as an attachment.
 
         Supports both project-specific recipes and global recipes (available in all projects).'
-      operationId: Download recipe
+      operationId: DownloadRecipe
       parameters:
       - name: project
         in: path
@@ -43,6 +43,8 @@ paths:
           description: Recipe not found
         '500':
           description: Internal server error
+      x-operation-id-source: normalized
+      x-operation-id-original: Download recipe
 components:
   schemas:
     IdOrKey:

@@ -16,7 +16,7 @@ paths:
       - Interactions
       summary: Add interaction
       description: Import an interaction in your project. You can also include feedback about the interaction
-      operationId: Add interaction
+      operationId: AddInteraction
       requestBody:
         content:
           application/json:
@@ -30,31 +30,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AddInteractionsResponse'
+      x-operation-id-source: normalized
+      x-operation-id-original: Add interaction
 components:
   schemas:
-    AddInteractionsResponse:
-      type: object
-      required:
-      - completion_id
-      - session_id
-      - feedback_ids
-      properties:
-        completion_id:
-          type: string
-          format: uuid
-        session_id:
-          type: string
-          format: uuid
-        feedback_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-    IdOrKey:
-      type: string
-      description: id or key of the entity
-      examples:
-      - 76d1fab3-214c-47ef-bb04-16270639bf89
     MessageContentPart:
       oneOf:
       - type: object
@@ -79,18 +58,6 @@ components:
             type: string
             enum:
             - image_url
-    InputDateTime:
-      type: string
-      description: Input date field
-      examples:
-      - '2024-02-21T09:51:03Z'
-    DictString:
-      type: object
-      description: dictionnary with key and values as string
-      additionalProperties:
-        type: string
-      examples:
-      - key: value
     AddInteractionsRequest:
       type: object
       required:
@@ -136,6 +103,11 @@ components:
           oneOf:
           - type: 'null'
           - $ref: '#/components/schemas/DictString'
+    InputDateTime:
+      type: string
+      description: Input date field
+      examples:
+      - '2024-02-21T09:51:03Z'
     MessagePackage:
       oneOf:
       - type: string
@@ -166,6 +138,13 @@ components:
           oneOf:
           - type: 'null'
           - $ref: '#/components/schemas/InputDateTime'
+    DictString:
+      type: object
+      description: dictionnary with key and values as string
+      additionalProperties:
+        type: string
+      examples:
+      - key: value
     ChatMessageInput:
       type: object
       required:
@@ -186,3 +165,26 @@ components:
           - 'null'
           format: uuid
         metadata: {}
+    AddInteractionsResponse:
+      type: object
+      required:
+      - completion_id
+      - session_id
+      - feedback_ids
+      properties:
+        completion_id:
+          type: string
+          format: uuid
+        session_id:
+          type: string
+          format: uuid
+        feedback_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+    IdOrKey:
+      type: string
+      description: id or key of the entity
+      examples:
+      - 76d1fab3-214c-47ef-bb04-16270639bf89

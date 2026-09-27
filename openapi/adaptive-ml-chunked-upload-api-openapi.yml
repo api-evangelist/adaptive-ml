@@ -16,7 +16,7 @@ paths:
       - Chunked Upload
       summary: Initialize Chunked Upload
       description: Start a new chunked upload session for large files. Returns a session ID to be used for uploading parts.
-      operationId: Initialize Chunked Upload
+      operationId: InitializeChunkedUpload
       requestBody:
         content:
           application/json:
@@ -30,13 +30,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InitChunkedUploadResponse'
+      x-operation-id-source: normalized
+      x-operation-id-original: Initialize Chunked Upload
   /api/v1/upload/part:
     post:
       tags:
       - Chunked Upload
       summary: Upload Part
       description: Upload a single part (chunk) of a file to an existing upload session.
-      operationId: Upload Part
+      operationId: UploadPart
       parameters:
       - name: session_id
         in: query
@@ -66,13 +68,15 @@ paths:
       responses:
         '200':
           description: Part uploaded successfully
+      x-operation-id-source: normalized
+      x-operation-id-original: Upload Part
   /api/v1/upload/abort:
     delete:
       tags:
       - Chunked Upload
       summary: Abort Chunked Upload
       description: Cancel an ongoing chunked upload session and clean up any uploaded parts.
-      operationId: Abort Chunked Upload
+      operationId: AbortChunkedUpload
       requestBody:
         content:
           application/json:
@@ -82,13 +86,15 @@ paths:
       responses:
         '200':
           description: Upload aborted successfully
+      x-operation-id-source: normalized
+      x-operation-id-original: Abort Chunked Upload
   /api/v1/upload/status:
     post:
       tags:
       - Chunked Upload
       summary: Get Upload Session Status
       description: Cancel an ongoing chunked upload session and clean up any uploaded parts.
-      operationId: Get Upload Session Status
+      operationId: GetUploadSessionStatus
       requestBody:
         content:
           application/json:
@@ -102,8 +108,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetUploadSessionStatusResponse'
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Upload Session Status
 components:
   schemas:
+    GetUploadSessionStatusRequest:
+      type: object
+      required:
+      - session_id
+      properties:
+        session_id:
+          type: string
     InitChunkedUploadRequest:
       type: object
       required:
@@ -128,6 +143,14 @@ components:
           format: int32
           description: Total number of parts that will be uploaded
           minimum: 1
+    AbortChunkedUploadRequest:
+      type: object
+      required:
+      - session_id
+      properties:
+        session_id:
+          type: string
+          description: Upload session identifier to abort
     InitChunkedUploadResponse:
       type: object
       required:
@@ -152,18 +175,3 @@ components:
           type: integer
           format: int32
           minimum: 0
-    AbortChunkedUploadRequest:
-      type: object
-      required:
-      - session_id
-      properties:
-        session_id:
-          type: string
-          description: Upload session identifier to abort
-    GetUploadSessionStatusRequest:
-      type: object
-      required:
-      - session_id
-      properties:
-        session_id:
-          type: string

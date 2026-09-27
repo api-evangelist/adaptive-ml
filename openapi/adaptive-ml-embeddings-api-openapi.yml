@@ -31,6 +31,13 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    EmbeddingsData:
+      oneOf:
+      - type: array
+        items:
+          type: number
+          format: float
+      - type: string
     GenerateEmbeddingsInput:
       type: object
       required:
@@ -63,13 +70,6 @@ components:
           - string
           - 'null'
           format: uuid
-    EmbeddingsData:
-      oneOf:
-      - type: array
-        items:
-          type: number
-          format: float
-      - type: string
     EmbeddingsEncodingFormat:
       type: string
       enum:

@@ -15,7 +15,7 @@ paths:
       - Datasets
       summary: Download a dataset file from storage
       description: Returns the dataset JSONL file as an attachment
-      operationId: Download dataset
+      operationId: DownloadDataset
       parameters:
       - name: project
         in: path
@@ -51,6 +51,8 @@ paths:
           description: Dataset not found
         '500':
           description: Internal server error
+      x-operation-id-source: normalized
+      x-operation-id-original: Download dataset
 components:
   schemas:
     IdOrKey:
