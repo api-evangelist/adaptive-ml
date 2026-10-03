@@ -31,6 +31,31 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    EmbeddingsResponseList:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmbeddingResponse'
+        usage:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Usage'
+    EmbeddingResponse:
+      type: object
+      required:
+      - index
+      - embedding
+      properties:
+        index:
+          type: integer
+          format: int32
+          minimum: 0
+        embedding:
+          $ref: '#/components/schemas/EmbeddingsData'
     EmbeddingsData:
       oneOf:
       - type: array
@@ -70,36 +95,6 @@ components:
           - string
           - 'null'
           format: uuid
-    EmbeddingsEncodingFormat:
-      type: string
-      enum:
-      - Float
-      - Base64
-    EmbeddingResponse:
-      type: object
-      required:
-      - index
-      - embedding
-      properties:
-        index:
-          type: integer
-          format: int32
-          minimum: 0
-        embedding:
-          $ref: '#/components/schemas/EmbeddingsData'
-    EmbeddingsResponseList:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmbeddingResponse'
-        usage:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/Usage'
     Usage:
       type: object
       required:
@@ -119,3 +114,8 @@ components:
           type: integer
           format: int32
           minimum: 0
+    EmbeddingsEncodingFormat:
+      type: string
+      enum:
+      - Float
+      - Base64

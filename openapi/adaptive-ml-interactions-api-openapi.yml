@@ -34,6 +34,54 @@ paths:
       x-operation-id-original: Add interaction
 components:
   schemas:
+    AddInteractionsResponse:
+      type: object
+      required:
+      - completion_id
+      - session_id
+      - feedback_ids
+      properties:
+        completion_id:
+          type: string
+          format: uuid
+        session_id:
+          type: string
+          format: uuid
+        feedback_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+    InteractionFeedback:
+      type: object
+      required:
+      - metric
+      - value
+      properties:
+        metric:
+          $ref: '#/components/schemas/IdOrKey'
+        value:
+          description: 'If the metric is Bool, accepts `0`, `1`, `true` or `false`
+
+            If the metric is Scalar, accepts number'
+        reason:
+          type:
+          - string
+          - 'null'
+        details:
+          type:
+          - string
+          - 'null'
+        created_at:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/InputDateTime'
+    MessagePackage:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/MessageContentPart'
     MessageContentPart:
       oneOf:
       - type: object
@@ -58,6 +106,26 @@ components:
             type: string
             enum:
             - image_url
+    ChatMessageInput:
+      type: object
+      required:
+      - content
+      - role
+      properties:
+        content:
+          $ref: '#/components/schemas/MessagePackage'
+        role:
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        completion_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        metadata: {}
     AddInteractionsRequest:
       type: object
       required:
@@ -103,41 +171,11 @@ components:
           oneOf:
           - type: 'null'
           - $ref: '#/components/schemas/DictString'
-    InputDateTime:
+    IdOrKey:
       type: string
-      description: Input date field
+      description: id or key of the entity
       examples:
-      - '2024-02-21T09:51:03Z'
-    MessagePackage:
-      oneOf:
-      - type: string
-      - type: array
-        items:
-          $ref: '#/components/schemas/MessageContentPart'
-    InteractionFeedback:
-      type: object
-      required:
-      - metric
-      - value
-      properties:
-        metric:
-          $ref: '#/components/schemas/IdOrKey'
-        value:
-          description: 'If the metric is Bool, accepts `0`, `1`, `true` or `false`
-
-            If the metric is Scalar, accepts number'
-        reason:
-          type:
-          - string
-          - 'null'
-        details:
-          type:
-          - string
-          - 'null'
-        created_at:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/InputDateTime'
+      - 76d1fab3-214c-47ef-bb04-16270639bf89
     DictString:
       type: object
       description: dictionnary with key and values as string
@@ -145,46 +183,8 @@ components:
         type: string
       examples:
       - key: value
-    ChatMessageInput:
-      type: object
-      required:
-      - content
-      - role
-      properties:
-        content:
-          $ref: '#/components/schemas/MessagePackage'
-        role:
-          type: string
-        name:
-          type:
-          - string
-          - 'null'
-        completion_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        metadata: {}
-    AddInteractionsResponse:
-      type: object
-      required:
-      - completion_id
-      - session_id
-      - feedback_ids
-      properties:
-        completion_id:
-          type: string
-          format: uuid
-        session_id:
-          type: string
-          format: uuid
-        feedback_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-    IdOrKey:
+    InputDateTime:
       type: string
-      description: id or key of the entity
+      description: Input date field
       examples:
-      - 76d1fab3-214c-47ef-bb04-16270639bf89
+      - '2024-02-21T09:51:03Z'

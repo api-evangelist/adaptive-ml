@@ -57,6 +57,44 @@ paths:
       x-operation-id-original: Add outcome
 components:
   schemas:
+    ComparisonOutput:
+      type: object
+      required:
+      - comparison_id
+      properties:
+        comparison_id:
+          type: string
+          format: uuid
+    AddOutcomeRequest:
+      type: object
+      required:
+      - value
+      - project_id
+      - metric
+      - session_id
+      properties:
+        value:
+          description: 'If the metric is Bool, accepts `0`, `1`, `true` or `false`
+
+            If the metric is Scalar, accepts number'
+        project_id:
+          $ref: '#/components/schemas/IdOrKey'
+        metric:
+          $ref: '#/components/schemas/IdOrKey'
+        session_id:
+          type: string
+          format: uuid
+        user_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+    MessagePackage:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/MessageContentPart'
     MessageContentPart:
       oneOf:
       - type: object
@@ -81,46 +119,6 @@ components:
             type: string
             enum:
             - image_url
-    ComparisonOutput:
-      type: object
-      required:
-      - comparison_id
-      properties:
-        comparison_id:
-          type: string
-          format: uuid
-    CompletionIdOrText:
-      oneOf:
-      - type: string
-        format: uuid
-      - type: object
-        required:
-        - text
-        - model
-        properties:
-          text:
-            type: string
-          model:
-            $ref: '#/components/schemas/IdOrKey'
-    MessagePackage:
-      oneOf:
-      - type: string
-      - type: array
-        items:
-          $ref: '#/components/schemas/MessageContentPart'
-    OutcomeOutput:
-      type: object
-      required:
-      - outcome_id
-      properties:
-        outcome_id:
-          type: string
-          format: uuid
-    ComparisonTie:
-      type: string
-      enum:
-      - good
-      - bad
     ChatMessageInput:
       type: object
       required:
@@ -141,6 +139,19 @@ components:
           - 'null'
           format: uuid
         metadata: {}
+    ComparisonTie:
+      type: string
+      enum:
+      - good
+      - bad
+    OutcomeOutput:
+      type: object
+      required:
+      - outcome_id
+      properties:
+        outcome_id:
+          type: string
+          format: uuid
     AddComparisonRequest:
       type: object
       required:
@@ -173,32 +184,21 @@ components:
           - string
           - 'null'
           format: uuid
-    AddOutcomeRequest:
-      type: object
-      required:
-      - value
-      - project_id
-      - metric
-      - session_id
-      properties:
-        value:
-          description: 'If the metric is Bool, accepts `0`, `1`, `true` or `false`
-
-            If the metric is Scalar, accepts number'
-        project_id:
-          $ref: '#/components/schemas/IdOrKey'
-        metric:
-          $ref: '#/components/schemas/IdOrKey'
-        session_id:
-          type: string
-          format: uuid
-        user_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
     IdOrKey:
       type: string
       description: id or key of the entity
       examples:
       - 76d1fab3-214c-47ef-bb04-16270639bf89
+    CompletionIdOrText:
+      oneOf:
+      - type: string
+        format: uuid
+      - type: object
+        required:
+        - text
+        - model
+        properties:
+          text:
+            type: string
+          model:
+            $ref: '#/components/schemas/IdOrKey'

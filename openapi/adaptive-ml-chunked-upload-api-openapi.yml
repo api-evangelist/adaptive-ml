@@ -119,30 +119,6 @@ components:
       properties:
         session_id:
           type: string
-    InitChunkedUploadRequest:
-      type: object
-      required:
-      - total_parts_count
-      properties:
-        content_type:
-          type:
-          - string
-          - 'null'
-          description: MIME type of the file being uploaded
-        metadata:
-          type:
-          - object
-          - 'null'
-          description: Custom metadata to attach to the upload session
-          additionalProperties:
-            type: string
-          propertyNames:
-            type: string
-        total_parts_count:
-          type: integer
-          format: int32
-          description: Total number of parts that will be uploaded
-          minimum: 1
     AbortChunkedUploadRequest:
       type: object
       required:
@@ -175,3 +151,27 @@ components:
           type: integer
           format: int32
           minimum: 0
+    InitChunkedUploadRequest:
+      type: object
+      required:
+      - total_parts_count
+      properties:
+        content_type:
+          type:
+          - string
+          - 'null'
+          description: MIME type of the file being uploaded
+        metadata:
+          type:
+          - object
+          - 'null'
+          description: Custom metadata to attach to the upload session
+          additionalProperties:
+            type: string
+          propertyNames:
+            type: string
+        total_parts_count:
+          type: integer
+          format: int32
+          description: Total number of parts that will be uploaded
+          minimum: 1

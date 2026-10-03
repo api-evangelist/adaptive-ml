@@ -38,67 +38,29 @@ paths:
                 $ref: '#/components/schemas/ChatResponseChunk'
 components:
   schemas:
-    MessageContentPart:
-      oneOf:
-      - type: object
-        required:
-        - text
-        - type
-        properties:
-          text:
-            type: string
-          type:
-            type: string
-            enum:
-            - text
-      - type: object
-        required:
-        - image_url
-        - type
-        properties:
-          image_url:
-            type: string
-          type:
-            type: string
-            enum:
-            - image_url
-    ChatChoiceMessage:
+    ChatResponseChunk:
       type: object
       required:
       - id
-      - role
-      - content
+      - choices
+      - created
+      - session_id
       properties:
         id:
           type: string
-        role:
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Delta'
+        created:
+          $ref: '#/components/schemas/Timestampsec'
+        session_id:
           type: string
-        content:
-          type: string
-    Delta:
-      type: object
-      required:
-      - delta
-      - index
-      - completion_id
-      properties:
-        delta:
-          $ref: '#/components/schemas/ChatChoiceMessage'
-        index:
-          type: integer
-          format: int32
-          minimum: 0
-        completion_id:
-          type: string
-        finish_reason:
-          type:
-          - string
-          - 'null'
-    StreamOptions:
-      type: object
-      properties:
-        include_usage:
-          type: boolean
+          format: uuid
+        usage:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Usage'
     ChatInput:
       allOf:
       - $ref: '#/components/schemas/GenerateParameters'
@@ -174,79 +136,55 @@ components:
             type:
             - boolean
             - 'null'
-    ToolOverride:
+    Delta:
       type: object
       required:
-      - id
-      - enabled
+      - delta
+      - index
+      - completion_id
       properties:
-        id:
+        delta:
+          $ref: '#/components/schemas/ChatChoiceMessage'
+        index:
+          type: integer
+          format: int32
+          minimum: 0
+        completion_id:
           type: string
-        enabled:
-          type: boolean
-    ChatResponse:
-      type: object
-      required:
-      - id
-      - created
-      - choices
-      - session_id
-      - usage
-      properties:
-        id:
-          type: string
-        created:
-          $ref: '#/components/schemas/Timestampsec'
-        choices:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatChoice'
-        session_id:
-          type: string
-          format: uuid
-        usage:
-          $ref: '#/components/schemas/Usage'
-    Timestampsec:
-      type: number
-      description: Unix Timestamp in seconds
-      examples:
-      - '1720712536'
+        finish_reason:
+          type:
+          - string
+          - 'null'
     MessagePackage:
       oneOf:
       - type: string
       - type: array
         items:
           $ref: '#/components/schemas/MessageContentPart'
-    DictString:
-      type: object
-      description: dictionnary with key and values as string
-      additionalProperties:
-        type: string
-      examples:
-      - key: value
-    ChatResponseChunk:
-      type: object
-      required:
-      - id
-      - choices
-      - created
-      - session_id
-      properties:
-        id:
-          type: string
-        choices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Delta'
-        created:
-          $ref: '#/components/schemas/Timestampsec'
-        session_id:
-          type: string
-          format: uuid
-        usage:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/Usage'
+    MessageContentPart:
+      oneOf:
+      - type: object
+        required:
+        - text
+        - type
+        properties:
+          text:
+            type: string
+          type:
+            type: string
+            enum:
+            - text
+      - type: object
+        required:
+        - image_url
+        - type
+        properties:
+          image_url:
+            type: string
+          type:
+            type: string
+            enum:
+            - image_url
     GenerateParameters:
       type: object
       properties:
@@ -298,6 +236,19 @@ components:
           - 'null'
           format: uuid
         metadata: {}
+    ChatChoiceMessage:
+      type: object
+      required:
+      - id
+      - role
+      - content
+      properties:
+        id:
+          type: string
+        role:
+          type: string
+        content:
+          type: string
     Usage:
       type: object
       required:
@@ -317,6 +268,38 @@ components:
           type: integer
           format: int32
           minimum: 0
+    StreamOptions:
+      type: object
+      properties:
+        include_usage:
+          type: boolean
+    ChatResponse:
+      type: object
+      required:
+      - id
+      - created
+      - choices
+      - session_id
+      - usage
+      properties:
+        id:
+          type: string
+        created:
+          $ref: '#/components/schemas/Timestampsec'
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatChoice'
+        session_id:
+          type: string
+          format: uuid
+        usage:
+          $ref: '#/components/schemas/Usage'
+    Timestampsec:
+      type: number
+      description: Unix Timestamp in seconds
+      examples:
+      - '1720712536'
     ChatChoice:
       type: object
       required:
@@ -339,6 +322,23 @@ components:
           type: string
         model:
           type: string
+    ToolOverride:
+      type: object
+      required:
+      - id
+      - enabled
+      properties:
+        id:
+          type: string
+        enabled:
+          type: boolean
+    DictString:
+      type: object
+      description: dictionnary with key and values as string
+      additionalProperties:
+        type: string
+      examples:
+      - key: value
     IdOrKey:
       type: string
       description: id or key of the entity
