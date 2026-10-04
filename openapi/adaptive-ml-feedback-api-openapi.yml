@@ -57,6 +57,39 @@ paths:
       x-operation-id-original: Add outcome
 components:
   schemas:
+    CompletionIdOrText:
+      oneOf:
+      - type: string
+        format: uuid
+      - type: object
+        required:
+        - text
+        - model
+        properties:
+          text:
+            type: string
+          model:
+            $ref: '#/components/schemas/IdOrKey'
+    ChatMessageInput:
+      type: object
+      required:
+      - content
+      - role
+      properties:
+        content:
+          $ref: '#/components/schemas/MessagePackage'
+        role:
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        completion_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        metadata: {}
     ComparisonOutput:
       type: object
       required:
@@ -89,12 +122,16 @@ components:
           - string
           - 'null'
           format: uuid
-    MessagePackage:
-      oneOf:
-      - type: string
-      - type: array
-        items:
-          $ref: '#/components/schemas/MessageContentPart'
+    ComparisonTie:
+      type: string
+      enum:
+      - good
+      - bad
+    IdOrKey:
+      type: string
+      description: id or key of the entity
+      examples:
+      - 76d1fab3-214c-47ef-bb04-16270639bf89
     MessageContentPart:
       oneOf:
       - type: object
@@ -119,39 +156,6 @@ components:
             type: string
             enum:
             - image_url
-    ChatMessageInput:
-      type: object
-      required:
-      - content
-      - role
-      properties:
-        content:
-          $ref: '#/components/schemas/MessagePackage'
-        role:
-          type: string
-        name:
-          type:
-          - string
-          - 'null'
-        completion_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        metadata: {}
-    ComparisonTie:
-      type: string
-      enum:
-      - good
-      - bad
-    OutcomeOutput:
-      type: object
-      required:
-      - outcome_id
-      properties:
-        outcome_id:
-          type: string
-          format: uuid
     AddComparisonRequest:
       type: object
       required:
@@ -184,21 +188,17 @@ components:
           - string
           - 'null'
           format: uuid
-    IdOrKey:
-      type: string
-      description: id or key of the entity
-      examples:
-      - 76d1fab3-214c-47ef-bb04-16270639bf89
-    CompletionIdOrText:
+    OutcomeOutput:
+      type: object
+      required:
+      - outcome_id
+      properties:
+        outcome_id:
+          type: string
+          format: uuid
+    MessagePackage:
       oneOf:
       - type: string
-        format: uuid
-      - type: object
-        required:
-        - text
-        - model
-        properties:
-          text:
-            type: string
-          model:
-            $ref: '#/components/schemas/IdOrKey'
+      - type: array
+        items:
+          $ref: '#/components/schemas/MessageContentPart'

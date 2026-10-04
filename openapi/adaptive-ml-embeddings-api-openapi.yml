@@ -44,25 +44,6 @@ components:
           oneOf:
           - type: 'null'
           - $ref: '#/components/schemas/Usage'
-    EmbeddingResponse:
-      type: object
-      required:
-      - index
-      - embedding
-      properties:
-        index:
-          type: integer
-          format: int32
-          minimum: 0
-        embedding:
-          $ref: '#/components/schemas/EmbeddingsData'
-    EmbeddingsData:
-      oneOf:
-      - type: array
-        items:
-          type: number
-          format: float
-      - type: string
     GenerateEmbeddingsInput:
       type: object
       required:
@@ -114,6 +95,25 @@ components:
           type: integer
           format: int32
           minimum: 0
+    EmbeddingsData:
+      oneOf:
+      - type: array
+        items:
+          type: number
+          format: float
+      - type: string
+    EmbeddingResponse:
+      type: object
+      required:
+      - index
+      - embedding
+      properties:
+        index:
+          type: integer
+          format: int32
+          minimum: 0
+        embedding:
+          $ref: '#/components/schemas/EmbeddingsData'
     EmbeddingsEncodingFormat:
       type: string
       enum:

@@ -119,22 +119,6 @@ components:
       properties:
         session_id:
           type: string
-    AbortChunkedUploadRequest:
-      type: object
-      required:
-      - session_id
-      properties:
-        session_id:
-          type: string
-          description: Upload session identifier to abort
-    InitChunkedUploadResponse:
-      type: object
-      required:
-      - session_id
-      properties:
-        session_id:
-          type: string
-          description: Unique identifier for the upload session
     GetUploadSessionStatusResponse:
       type: object
       required:
@@ -151,6 +135,22 @@ components:
           type: integer
           format: int32
           minimum: 0
+    AbortChunkedUploadRequest:
+      type: object
+      required:
+      - session_id
+      properties:
+        session_id:
+          type: string
+          description: Upload session identifier to abort
+    InitChunkedUploadResponse:
+      type: object
+      required:
+      - session_id
+      properties:
+        session_id:
+          type: string
+          description: Unique identifier for the upload session
     InitChunkedUploadRequest:
       type: object
       required:

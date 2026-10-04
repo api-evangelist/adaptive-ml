@@ -34,98 +34,6 @@ paths:
       x-operation-id-original: Add interaction
 components:
   schemas:
-    AddInteractionsResponse:
-      type: object
-      required:
-      - completion_id
-      - session_id
-      - feedback_ids
-      properties:
-        completion_id:
-          type: string
-          format: uuid
-        session_id:
-          type: string
-          format: uuid
-        feedback_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-    InteractionFeedback:
-      type: object
-      required:
-      - metric
-      - value
-      properties:
-        metric:
-          $ref: '#/components/schemas/IdOrKey'
-        value:
-          description: 'If the metric is Bool, accepts `0`, `1`, `true` or `false`
-
-            If the metric is Scalar, accepts number'
-        reason:
-          type:
-          - string
-          - 'null'
-        details:
-          type:
-          - string
-          - 'null'
-        created_at:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/InputDateTime'
-    MessagePackage:
-      oneOf:
-      - type: string
-      - type: array
-        items:
-          $ref: '#/components/schemas/MessageContentPart'
-    MessageContentPart:
-      oneOf:
-      - type: object
-        required:
-        - text
-        - type
-        properties:
-          text:
-            type: string
-          type:
-            type: string
-            enum:
-            - text
-      - type: object
-        required:
-        - image_url
-        - type
-        properties:
-          image_url:
-            type: string
-          type:
-            type: string
-            enum:
-            - image_url
-    ChatMessageInput:
-      type: object
-      required:
-      - content
-      - role
-      properties:
-        content:
-          $ref: '#/components/schemas/MessagePackage'
-        role:
-          type: string
-        name:
-          type:
-          - string
-          - 'null'
-        completion_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        metadata: {}
     AddInteractionsRequest:
       type: object
       required:
@@ -171,11 +79,26 @@ components:
           oneOf:
           - type: 'null'
           - $ref: '#/components/schemas/DictString'
-    IdOrKey:
-      type: string
-      description: id or key of the entity
-      examples:
-      - 76d1fab3-214c-47ef-bb04-16270639bf89
+    ChatMessageInput:
+      type: object
+      required:
+      - content
+      - role
+      properties:
+        content:
+          $ref: '#/components/schemas/MessagePackage'
+        role:
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        completion_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        metadata: {}
     DictString:
       type: object
       description: dictionnary with key and values as string
@@ -183,8 +106,85 @@ components:
         type: string
       examples:
       - key: value
+    MessageContentPart:
+      oneOf:
+      - type: object
+        required:
+        - text
+        - type
+        properties:
+          text:
+            type: string
+          type:
+            type: string
+            enum:
+            - text
+      - type: object
+        required:
+        - image_url
+        - type
+        properties:
+          image_url:
+            type: string
+          type:
+            type: string
+            enum:
+            - image_url
+    IdOrKey:
+      type: string
+      description: id or key of the entity
+      examples:
+      - 76d1fab3-214c-47ef-bb04-16270639bf89
     InputDateTime:
       type: string
       description: Input date field
       examples:
       - '2024-02-21T09:51:03Z'
+    InteractionFeedback:
+      type: object
+      required:
+      - metric
+      - value
+      properties:
+        metric:
+          $ref: '#/components/schemas/IdOrKey'
+        value:
+          description: 'If the metric is Bool, accepts `0`, `1`, `true` or `false`
+
+            If the metric is Scalar, accepts number'
+        reason:
+          type:
+          - string
+          - 'null'
+        details:
+          type:
+          - string
+          - 'null'
+        created_at:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/InputDateTime'
+    MessagePackage:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/MessageContentPart'
+    AddInteractionsResponse:
+      type: object
+      required:
+      - completion_id
+      - session_id
+      - feedback_ids
+      properties:
+        completion_id:
+          type: string
+          format: uuid
+        session_id:
+          type: string
+          format: uuid
+        feedback_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
