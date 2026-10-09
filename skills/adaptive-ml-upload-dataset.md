@@ -2,7 +2,7 @@
 name: Upload a large dataset via chunked upload
 description: Upload large training/evaluation files to Adaptive Engine using the chunked-upload session API (init, part, status, abort).
 api: openapi/adaptive-ml-openapi-original.json
-operations: [Initialize Chunked Upload, Upload Part, Get Upload Session Status, Abort Chunked Upload]
+operations: [InitializeChunkedUpload, UploadPart, GetUploadSessionStatus, AbortChunkedUpload]
 ---
 
 # Upload a large dataset (chunked upload)

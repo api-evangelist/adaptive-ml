@@ -2,7 +2,7 @@
 name: Log interactions and feedback for training/evaluation
 description: Record prompts/completions, pairwise comparisons, and outcomes so Adaptive Engine can score models and drive RL post-training.
 api: openapi/adaptive-ml-openapi-original.json
-operations: [Add interaction, Add comparison, Add outcome]
+operations: [AddInteraction, AddComparison, AddOutcome]
 ---
 
 # Log interactions and feedback
