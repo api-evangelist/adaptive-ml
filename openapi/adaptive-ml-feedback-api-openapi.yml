@@ -57,6 +57,57 @@ paths:
       x-operation-id-original: Add outcome
 components:
   schemas:
+    AddComparisonRequest:
+      type: object
+      required:
+      - metric
+      - preferred_completion
+      - other_completion
+      - project
+      properties:
+        metric:
+          $ref: '#/components/schemas/IdOrKey'
+        messages:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ChatMessageInput'
+          description: Required when using raw text for completion, ignored if using ids
+        preferred_completion:
+          $ref: '#/components/schemas/CompletionIdOrText'
+        other_completion:
+          $ref: '#/components/schemas/CompletionIdOrText'
+        tied:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ComparisonTie'
+        project:
+          $ref: '#/components/schemas/IdOrKey'
+        user_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+    ComparisonOutput:
+      type: object
+      required:
+      - comparison_id
+      properties:
+        comparison_id:
+          type: string
+          format: uuid
+    IdOrKey:
+      type: string
+      description: id or key of the entity
+      examples:
+      - 76d1fab3-214c-47ef-bb04-16270639bf89
+    MessagePackage:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/MessageContentPart'
     CompletionIdOrText:
       oneOf:
       - type: string
@@ -90,12 +141,36 @@ components:
           - 'null'
           format: uuid
         metadata: {}
-    ComparisonOutput:
+    MessageContentPart:
+      oneOf:
+      - type: object
+        required:
+        - text
+        - type
+        properties:
+          text:
+            type: string
+          type:
+            type: string
+            enum:
+            - text
+      - type: object
+        required:
+        - image_url
+        - type
+        properties:
+          image_url:
+            type: string
+          type:
+            type: string
+            enum:
+            - image_url
+    OutcomeOutput:
       type: object
       required:
-      - comparison_id
+      - outcome_id
       properties:
-        comparison_id:
+        outcome_id:
           type: string
           format: uuid
     AddOutcomeRequest:
@@ -127,78 +202,3 @@ components:
       enum:
       - good
       - bad
-    IdOrKey:
-      type: string
-      description: id or key of the entity
-      examples:
-      - 76d1fab3-214c-47ef-bb04-16270639bf89
-    MessageContentPart:
-      oneOf:
-      - type: object
-        required:
-        - text
-        - type
-        properties:
-          text:
-            type: string
-          type:
-            type: string
-            enum:
-            - text
-      - type: object
-        required:
-        - image_url
-        - type
-        properties:
-          image_url:
-            type: string
-          type:
-            type: string
-            enum:
-            - image_url
-    AddComparisonRequest:
-      type: object
-      required:
-      - metric
-      - preferred_completion
-      - other_completion
-      - project
-      properties:
-        metric:
-          $ref: '#/components/schemas/IdOrKey'
-        messages:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ChatMessageInput'
-          description: Required when using raw text for completion, ignored if using ids
-        preferred_completion:
-          $ref: '#/components/schemas/CompletionIdOrText'
-        other_completion:
-          $ref: '#/components/schemas/CompletionIdOrText'
-        tied:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/ComparisonTie'
-        project:
-          $ref: '#/components/schemas/IdOrKey'
-        user_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-    OutcomeOutput:
-      type: object
-      required:
-      - outcome_id
-      properties:
-        outcome_id:
-          type: string
-          format: uuid
-    MessagePackage:
-      oneOf:
-      - type: string
-      - type: array
-        items:
-          $ref: '#/components/schemas/MessageContentPart'

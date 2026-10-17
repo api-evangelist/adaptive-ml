@@ -31,19 +31,30 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    EmbeddingsResponseList:
+    EmbeddingsEncodingFormat:
+      type: string
+      enum:
+      - Float
+      - Base64
+    EmbeddingsData:
+      oneOf:
+      - type: array
+        items:
+          type: number
+          format: float
+      - type: string
+    EmbeddingResponse:
       type: object
       required:
-      - data
+      - index
+      - embedding
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmbeddingResponse'
-        usage:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/Usage'
+        index:
+          type: integer
+          format: int32
+          minimum: 0
+        embedding:
+          $ref: '#/components/schemas/EmbeddingsData'
     GenerateEmbeddingsInput:
       type: object
       required:
@@ -95,27 +106,16 @@ components:
           type: integer
           format: int32
           minimum: 0
-    EmbeddingsData:
-      oneOf:
-      - type: array
-        items:
-          type: number
-          format: float
-      - type: string
-    EmbeddingResponse:
+    EmbeddingsResponseList:
       type: object
       required:
-      - index
-      - embedding
+      - data
       properties:
-        index:
-          type: integer
-          format: int32
-          minimum: 0
-        embedding:
-          $ref: '#/components/schemas/EmbeddingsData'
-    EmbeddingsEncodingFormat:
-      type: string
-      enum:
-      - Float
-      - Base64
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmbeddingResponse'
+        usage:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Usage'

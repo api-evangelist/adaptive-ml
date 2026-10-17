@@ -38,54 +38,55 @@ paths:
                 $ref: '#/components/schemas/ChatResponseChunk'
 components:
   schemas:
-    ChatChoiceMessage:
+    ChatChoice:
       type: object
       required:
-      - id
-      - role
-      - content
+      - index
+      - message
+      - completion_id
+      - model
       properties:
-        id:
-          type: string
-        role:
-          type: string
-        content:
-          type: string
-    StreamOptions:
-      type: object
-      properties:
-        include_usage:
-          type: boolean
-    ToolOverride:
-      type: object
-      required:
-      - id
-      - enabled
-      properties:
-        id:
-          type: string
-        enabled:
-          type: boolean
-    ChatMessageInput:
-      type: object
-      required:
-      - content
-      - role
-      properties:
-        content:
-          $ref: '#/components/schemas/MessagePackage'
-        role:
-          type: string
-        name:
+        index:
+          type: integer
+          format: int32
+          minimum: 0
+        message:
+          $ref: '#/components/schemas/ChatChoiceMessage'
+        finish_reason:
           type:
           - string
           - 'null'
         completion_id:
-          type:
-          - string
-          - 'null'
+          type: string
+        model:
+          type: string
+    ChatResponse:
+      type: object
+      required:
+      - id
+      - created
+      - choices
+      - session_id
+      - usage
+      properties:
+        id:
+          type: string
+        created:
+          $ref: '#/components/schemas/Timestampsec'
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatChoice'
+        session_id:
+          type: string
           format: uuid
-        metadata: {}
+        usage:
+          $ref: '#/components/schemas/Usage'
+    IdOrKey:
+      type: string
+      description: id or key of the entity
+      examples:
+      - 76d1fab3-214c-47ef-bb04-16270639bf89
     GenerateParameters:
       type: object
       properties:
@@ -117,79 +118,19 @@ components:
           - 'null'
           format: int64
           minimum: 0
-    ChatResponseChunk:
+    ChatChoiceMessage:
       type: object
       required:
       - id
-      - choices
-      - created
-      - session_id
+      - role
+      - content
       properties:
         id:
           type: string
-        choices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Delta'
-        created:
-          $ref: '#/components/schemas/Timestampsec'
-        session_id:
+        role:
           type: string
-          format: uuid
-        usage:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/Usage'
-    DictString:
-      type: object
-      description: dictionnary with key and values as string
-      additionalProperties:
-        type: string
-      examples:
-      - key: value
-    Delta:
-      type: object
-      required:
-      - delta
-      - index
-      - completion_id
-      properties:
-        delta:
-          $ref: '#/components/schemas/ChatChoiceMessage'
-        index:
-          type: integer
-          format: int32
-          minimum: 0
-        completion_id:
+        content:
           type: string
-        finish_reason:
-          type:
-          - string
-          - 'null'
-    MessageContentPart:
-      oneOf:
-      - type: object
-        required:
-        - text
-        - type
-        properties:
-          text:
-            type: string
-          type:
-            type: string
-            enum:
-            - text
-      - type: object
-        required:
-        - image_url
-        - type
-        properties:
-          image_url:
-            type: string
-          type:
-            type: string
-            enum:
-            - image_url
     ChatInput:
       allOf:
       - $ref: '#/components/schemas/GenerateParameters'
@@ -265,66 +206,83 @@ components:
             type:
             - boolean
             - 'null'
-    Timestampsec:
-      type: number
-      description: Unix Timestamp in seconds
-      examples:
-      - '1720712536'
-    IdOrKey:
-      type: string
-      description: id or key of the entity
-      examples:
-      - 76d1fab3-214c-47ef-bb04-16270639bf89
-    ChatResponse:
+    DictString:
       type: object
-      required:
-      - id
-      - created
-      - choices
-      - session_id
-      - usage
-      properties:
-        id:
-          type: string
-        created:
-          $ref: '#/components/schemas/Timestampsec'
-        choices:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatChoice'
-        session_id:
-          type: string
-          format: uuid
-        usage:
-          $ref: '#/components/schemas/Usage'
-    ChatChoice:
-      type: object
-      required:
-      - index
-      - message
-      - completion_id
-      - model
-      properties:
-        index:
-          type: integer
-          format: int32
-          minimum: 0
-        message:
-          $ref: '#/components/schemas/ChatChoiceMessage'
-        finish_reason:
-          type:
-          - string
-          - 'null'
-        completion_id:
-          type: string
-        model:
-          type: string
+      description: dictionnary with key and values as string
+      additionalProperties:
+        type: string
+      examples:
+      - key: value
     MessagePackage:
       oneOf:
       - type: string
       - type: array
         items:
           $ref: '#/components/schemas/MessageContentPart'
+    Timestampsec:
+      type: number
+      description: Unix Timestamp in seconds
+      examples:
+      - '1720712536'
+    StreamOptions:
+      type: object
+      properties:
+        include_usage:
+          type: boolean
+    MessageContentPart:
+      oneOf:
+      - type: object
+        required:
+        - text
+        - type
+        properties:
+          text:
+            type: string
+          type:
+            type: string
+            enum:
+            - text
+      - type: object
+        required:
+        - image_url
+        - type
+        properties:
+          image_url:
+            type: string
+          type:
+            type: string
+            enum:
+            - image_url
+    ChatMessageInput:
+      type: object
+      required:
+      - content
+      - role
+      properties:
+        content:
+          $ref: '#/components/schemas/MessagePackage'
+        role:
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        completion_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        metadata: {}
+    ToolOverride:
+      type: object
+      required:
+      - id
+      - enabled
+      properties:
+        id:
+          type: string
+        enabled:
+          type: boolean
     Usage:
       type: object
       required:
@@ -344,3 +302,45 @@ components:
           type: integer
           format: int32
           minimum: 0
+    ChatResponseChunk:
+      type: object
+      required:
+      - id
+      - choices
+      - created
+      - session_id
+      properties:
+        id:
+          type: string
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Delta'
+        created:
+          $ref: '#/components/schemas/Timestampsec'
+        session_id:
+          type: string
+          format: uuid
+        usage:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Usage'
+    Delta:
+      type: object
+      required:
+      - delta
+      - index
+      - completion_id
+      properties:
+        delta:
+          $ref: '#/components/schemas/ChatChoiceMessage'
+        index:
+          type: integer
+          format: int32
+          minimum: 0
+        completion_id:
+          type: string
+        finish_reason:
+          type:
+          - string
+          - 'null'
