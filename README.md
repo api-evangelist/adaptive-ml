@@ -64,6 +64,138 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Adaptive ML is a company surfaced as a portfolio company of index-ventures and added to the API Evangelist network as a stub for enrichment. Sector: ai-ml. This profile is a lead awaiting the enrichment pipeline.
+Adaptive ML builds Adaptive Engine, an enterprise platform for developing, evaluating, and serving specialized open-source large language models via reinforcement-learning post-training. The three-phase workflow (Adapt, Evaluate, Serve) lets teams fine-tune smaller models to outperform commercial APIs, measure them with custom AI judges and graders, and feed production signals back into training. Adaptive Engine is self-hosted (Kubernetes/Helm) and exposes an OpenAI-compatible REST API for chat completions and embeddings, plus interactions, comparisons, outcomes, dataset/recipe management, and chunked uploads. Tooling includes the Python adaptive-sdk and adaptive-harmony libraries and the adpt CLI. Adaptive ML was acquired by Datadog.
 
-Source: portfolio company of [index-ventures](https://github.com/api-evangelist/index-ventures) — http://adaptive-ml.com
+**Areas:** Company · Artificial Intelligence · LLM · Fine-Tuning · Reinforcement Learning · Model Evaluation · Inference · OpenAI-Compatible · MLOps
+
+## Adaptive ML on APIs.io
+
+Everything profiled for Adaptive ML is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/adaptive-ml/](https://apis.io/providers/adaptive-ml/)** — or go straight to one of the APIs or properties below.
+
+### APIs (9)
+
+- [Adaptive ML artifacts::rest API](https://apis.io/apis/adaptive-ml/adaptive-ml-artifacts-rest-api/) — The artifacts::rest API from Adaptive ML — 1 operation(s) for artifacts::rest.
+- [Adaptive ML Chunked Upload API](https://apis.io/apis/adaptive-ml/adaptive-ml-chunked-upload-api/) — Upload large files in chunks
+- [Adaptive ML Completions API](https://apis.io/apis/adaptive-ml/adaptive-ml-completions-api/) — The Completions API from Adaptive ML — 1 operation(s) for completions.
+- [Adaptive ML Datasets API](https://apis.io/apis/adaptive-ml/adaptive-ml-datasets-api/) — The Datasets API from Adaptive ML — 1 operation(s) for datasets.
+- [Adaptive ML Embeddings API](https://apis.io/apis/adaptive-ml/adaptive-ml-embeddings-api/) — The Embeddings API from Adaptive ML — 1 operation(s) for embeddings.
+- [Adaptive ML Feedback API](https://apis.io/apis/adaptive-ml/adaptive-ml-feedback-api/) — The Feedback API from Adaptive ML — 2 operation(s) for feedback.
+- [Adaptive ML image::rest API](https://apis.io/apis/adaptive-ml/adaptive-ml-image-rest-api/) — The image::rest API from Adaptive ML — 1 operation(s) for image::rest.
+- [Adaptive ML Interactions API](https://apis.io/apis/adaptive-ml/adaptive-ml-interactions-api/) — Load interactions in the db
+- [Adaptive ML Recipes API](https://apis.io/apis/adaptive-ml/adaptive-ml-recipes-api/) — Recipe operations
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Adaptive Ml Webhooks](https://apis.io/asyncapis/adaptive-ml/adaptive-ml-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [adaptive-ml](https://apis.io/servers/adaptive-ml/adaptive-ml/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Adaptive Ml Agentic Access](https://apis.io/agentic-access/adaptive-ml/adaptive-ml-agentic-access/)
+
+#### Collections (9)
+
+Postman and Open Collection request collections.
+
+- [concorde artifacts::rest API](https://apis.io/collections/adaptive-ml/open-adaptive-ml-artifacts-rest-api/)
+- [concorde artifacts::rest Chunked Upload API](https://apis.io/collections/adaptive-ml/open-adaptive-ml-chunked-upload-api/)
+- [concorde artifacts::rest Completions API](https://apis.io/collections/adaptive-ml/open-adaptive-ml-completions-api/)
+- [concorde artifacts::rest Datasets API](https://apis.io/collections/adaptive-ml/open-adaptive-ml-datasets-api/)
+- [concorde artifacts::rest Embeddings API](https://apis.io/collections/adaptive-ml/open-adaptive-ml-embeddings-api/)
+- [concorde artifacts::rest Feedback API](https://apis.io/collections/adaptive-ml/open-adaptive-ml-feedback-api/)
+- [concorde artifacts::rest image::rest API](https://apis.io/collections/adaptive-ml/open-adaptive-ml-image-rest-api/)
+- [concorde artifacts::rest Interactions API](https://apis.io/collections/adaptive-ml/open-adaptive-ml-interactions-api/)
+- [concorde artifacts::rest Recipes API](https://apis.io/collections/adaptive-ml/open-adaptive-ml-recipes-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Adaptive Ml Openapi Overlay](https://apis.io/overlays/adaptive-ml/adaptive-ml-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Adaptive Ml Authentication](https://apis.io/security/adaptive-ml/adaptive-ml-authentication/)
+- [Adaptive Ml Domain Security](https://apis.io/security/adaptive-ml/adaptive-ml-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.adaptive-ml.com)
+- [Documentation](https://docs.adaptive-ml.com/v0.14/introduction)
+- [Getting started](https://docs.adaptive-ml.com/quickstart)
+- [API reference](https://docs.adaptive-ml.com/v0.14/reference/api)
+- [Sign up](https://www.adaptive-ml.com/book-a-demo)
+- [Support](https://www.adaptive-ml.com/contact-us)
+- [Blog](https://www.adaptive-ml.com/blog)
+- [Privacy policy](https://www.adaptive-ml.com/privacy)
+- [GitHub](https://github.com/adaptive-ml)
+
+## API Evangelist rating
+
+**Kin Score 39.7** — developing · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 46.2 |
+| Contract governance | 4.5 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 61.3 |
+| Access clarity | 23.7 |
+
+**Agent readiness 23.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 19.1** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/adaptive-ml/](https://apis.io/providers/adaptive-ml/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Adaptive ML: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/adaptive-ml/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
