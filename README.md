@@ -104,7 +104,7 @@ Model Context Protocol servers that expose the API to agents.
 
 Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Adaptive Ml Agentic Access](https://apis.io/agentic-access/adaptive-ml/adaptive-ml-agentic-access/)
+- [Adaptive ML Agentic Access](https://apis.io/agentic-access/adaptive-ml/adaptive-ml-agentic-access/)
 
 #### Collections (9)
 
@@ -124,14 +124,20 @@ Postman and Open Collection request collections.
 
 OpenAPI overlays, including conversational phrasing for each operation.
 
-- [Adaptive Ml Openapi Overlay](https://apis.io/overlays/adaptive-ml/adaptive-ml-openapi-overlay/)
+- [Adaptive ML Openapi Overlay](https://apis.io/overlays/adaptive-ml/adaptive-ml-openapi-overlay/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Adaptive ML API Rules](https://apis.io/rules/adaptive-ml/adaptive-ml-rules/)
 
 #### Security (2)
 
 Authentication, trust centre, and vulnerability disclosure.
 
-- [Adaptive Ml Authentication](https://apis.io/security/adaptive-ml/adaptive-ml-authentication/)
-- [Adaptive Ml Domain Security](https://apis.io/security/adaptive-ml/adaptive-ml-domain-security/)
+- [Adaptive ML Authentication](https://apis.io/security/adaptive-ml/adaptive-ml-authentication/)
+- [Adaptive ML Domain Security](https://apis.io/security/adaptive-ml/adaptive-ml-domain-security/)
 
 ## Where to find this API
 
@@ -149,16 +155,16 @@ Links to the company's own pages. This repository publishes no copy of their spe
 
 ## API Evangelist rating
 
-**Kin Score 39.7** — developing · rubric 0.25.0 · scored 2026-10-23
+**Kin Score 40.5** — developing · rubric 0.28.1 · scored 2026-11-21
 
 | Facet | Score |
 |---|---|
 | Discoverability | 73.2 |
 | Contract quality | 46.2 |
-| Contract governance | 4.5 |
-| Operational transparency | 26.3 |
+| Contract governance | 18.2 |
+| Operational transparency | 26.2 |
 | Developer ergonomics | 61.3 |
-| Access clarity | 23.7 |
+| Access clarity | 23.4 |
 
 **Agent readiness 24.8** — agent-aware
 
@@ -185,8 +191,12 @@ Links to the company's own pages. This repository publishes no copy of their spe
 | Agentic Commerce | — |
 | Pagination Ratio | na |
 | Operation Distinctiveness | distinct |
+| MCP Tool Quality | na |
+| Onboarding Descriptor | — |
+| Dns Aid Index | na |
+| Markdown Negotiation | yes |
 
-**Regulatory alignment 19.1** — Horizontal (data, software, accessibility, platform)
+**Regulatory alignment 13.6** — Horizontal (data, software, accessibility, platform)
 
 The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/adaptive-ml/](https://apis.io/providers/adaptive-ml/).
 
